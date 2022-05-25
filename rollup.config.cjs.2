@@ -1,0 +1,33 @@
+const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve');
+
+const EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
+
+const assets = [
+  {
+    // ...locales,
+    output: {
+      dir: 'dist',
+      format: 'esm',
+      sourcemap: false,
+    },
+  },
+];
+
+module.exports = {
+  // entry: 'src/index.js',
+  input: 'src/index.tsx',
+  assets,
+  output: {
+    file: './build/bundle.js',
+    format: 'es',
+  },
+  plugins: [resolve({ extensions: EXTENSIONS })],
+  watch: {
+    include: ["src/index.tsx", "rollup.config.ts"], // './src/**',
+    clearScreen: false,
+  },
+  devServer: {
+    inline: false,
+    contentBase: './dist',
+  },
+};
