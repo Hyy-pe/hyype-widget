@@ -64,7 +64,8 @@ module.exports = (webpackConfig) => {
     resolve: {
       ...resolve,
       alias: {
-        '@hyype/widget': path.resolve(__dirname, 'dist/'),
+        '@hyype/widget': path.resolve(__dirname, './src/index.tsx'),
+        _: path.resolve(__dirname, './src'),
       },
     },
     module: {

@@ -34,7 +34,7 @@ const EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
  * yields a less complex pipeline.
  */
 const transpile = {
-  // input: 'src/index.tsx',
+  input: 'src/index.tsx',
   external: isEthers,
   plugins: [
     // Dependency resolution

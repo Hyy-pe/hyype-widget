@@ -1,10 +1,19 @@
 import React from 'react';
+import { JsonRpcProvider } from '@ethersproject/providers';
+import { Provider as Eip1193Provider } from '@web3-react/types';
+
 // import logo from './logo.svg';
 import './widgetStyling.css';
-import { HyypeWidgetProps } from './index';
 
-function Widget(props: HyypeWidgetProps) {
-  const { name } = props;
+export type WidgetProps = {
+  name: string;
+  jsonRpcEndpoint?: string | JsonRpcProvider;
+  provider?: Eip1193Provider | JsonRpcProvider;
+};
+
+function Widget(props: WidgetProps) {
+  const { name, jsonRpcEndpoint, provider } = props;
+  console.log('>> jsonRpcEndpoint: ', jsonRpcEndpoint, ' > provider: ', provider )
 
   return (
     <div className="App">
