@@ -8,8 +8,7 @@ import { WidgetProps } from './Widget';
 
 // exports
 export { SupportedChainId } from 'constants/chains';
-
-
+export { darkTheme, defaultTheme, lightTheme } from 'theme';
 
 export function HyypeWidget(props: WidgetProps) {
   return (

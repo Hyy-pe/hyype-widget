@@ -57,7 +57,7 @@ class RollupPlugin extends EventEmitter {
 module.exports = (webpackConfig) => {
   const { mode, module, resolve } = webpackConfig;
   const { rules } = module;
-  console.log('>>>', webpackConfig);
+
   return {
     ...webpackConfig,
     // input: 'src/index.tsx',

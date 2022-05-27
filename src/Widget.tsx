@@ -42,7 +42,7 @@ export type WidgetProps = {
 
 function Widget(props: WidgetProps) {
   const { name, jsonRpcEndpoint, provider } = props;
-  console.log('>> jsonRpcEndpoint: ', jsonRpcEndpoint, ' > provider: ', provider);
+  // console.log('>> jsonRpcEndpoint: ', jsonRpcEndpoint, ' > provider: ', provider);
   const [isLorePosting, setIsLorePosting] = useState(true);
 
   const checkRequiredFields = () => {
