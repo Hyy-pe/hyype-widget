@@ -1,5 +1,5 @@
 # pull official base image
-FROM 869525123420.dkr.ecr.us-east-1.amazonaws.com/node:12-alpine as node
+FROM 869525123420.dkr.ecr.us-east-1.amazonaws.com/node:16-alpine as node
 
 # set working directory
 WORKDIR /app
