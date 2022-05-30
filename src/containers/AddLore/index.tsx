@@ -23,15 +23,7 @@ import {
   HeadingSecondary,
   SeeWritingPrompt,
   EditorMain,
-} from './addLoreContentStyling';
-
-// import {
-//   AddLoreHeader,
-//   HeaderContent,
-//   HeaderContainer,
-//   NftNamePlaceHolder,
-// } from 'containers/AddLoreModifyCard/addLoreModifyCardStyling';
-// import LoreDropdown from 'components/LoreDropdown';
+} from './addLoreStyling';
 
 import Editor from 'components/Editor/Editor';
 
