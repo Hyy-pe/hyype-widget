@@ -17,7 +17,7 @@ const [walletConnect] = initializeConnector<WalletConnect>(
 );
 
 export default function useWeb3Provider() {
-  const connectorType = useOption('web3Provider', { options: [Wallet.MetaMask, Wallet.WalletConnect] });
+  const connectorType: any = useOption('web3Provider', { options: [Wallet.MetaMask, Wallet.WalletConnect] });
   const [connector, setConnector] = useState<Connector>();
   useEffect(() => {
     let stale = false;
