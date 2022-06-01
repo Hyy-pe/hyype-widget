@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import { Provider as Eip1193Provider } from '@web3-react/types';
-import AddLore from 'containers/AddLore';
-import { Theme, ThemeProvider } from 'theme';
 import { WIDGET_MIN_WIDTH } from 'constants/misc';
+import AddLore from 'containers/AddLore';
+import React, { useMemo, useState } from 'react';
+import { Theme, ThemeProvider } from 'theme';
 
 // import logo from './logo.svg';
-import { WidgetWrapper, Button, Alert } from './widgetStyling';
+import { Alert, Button, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
@@ -56,19 +56,15 @@ export default function Widget(props: WidgetProps) {
   return (
     <ThemeProvider theme={theme}>
       <WidgetWrapper width={width}>
-        <div className="App">
-          <header className="App-header">
-            {checkRequiredFields()}
+        {/* {checkRequiredFields()} */}
 
-            {isLorePosting ? (
-              <AddLore />
-            ) : (
-              <Button onClick={() => setIsLorePosting(true)}>Post Lore</Button>
-            )}
+        {isLorePosting ? (
+          <AddLore />
+        ) : (
+          <Button onClick={() => setIsLorePosting(true)}>Post Lore</Button>
+        )}
 
-            {}
-          </header>
-        </div>
+        {}
       </WidgetWrapper>
     </ThemeProvider>
   );

@@ -10,9 +10,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.App {
-  text-align: center;
-}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -22,15 +19,7 @@ code {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #000;
-}
+
 .App-link {
   color: #61dafb;
 }

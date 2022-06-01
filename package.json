@@ -9,6 +9,7 @@
     "cosmos": "cosmos",
     "cosmos:export": "cosmos-export",
     "start": "cosmos",
+    "lint": "eslint .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -75,7 +76,9 @@
     "@web3-react/metamask": "^8.0.19-beta.0",
     "@web3-react/walletconnect": "^8.0.26-beta.0",
     "babel-plugin-module-resolver": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-better-styled-components": "^1.1.2",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "react-cosmos": "^5.6.6",

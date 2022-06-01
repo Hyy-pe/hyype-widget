@@ -1,33 +1,11 @@
-import React, { FC, useState, useEffect } from 'react';
 // import dynamic from 'next/dynamic';
 // import { useRouter } from 'next/router';
-
-import { Button, Switch, ImgWrap } from 'components';
-import { NotificationsPanel } from 'containers';
-import { VideoWrapper } from 'containers/NftDetailImg/nftDetailImgStyling';
+import Editor from 'components/Editor/Editor';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
+import React, { FC, useEffect, useState } from 'react';
 
 // import useCommon from 'contexts/CommonProvider/useCommon';
-
-import {
-  Wrapper,
-  Container,
-  Sidebar,
-  MainWrap,
-  Main,
-  Heading,
-  Subheading,
-  ImgContainer,
-  EditorContainer,
-  EditorWrapper,
-  HeadingWrap,
-  HeadingSecondary,
-  SeeWritingPrompt,
-  EditorMain,
-} from './addLoreStyling';
-
-import Editor from 'components/Editor/Editor';
-import { ThemeProvider } from 'theme';
+import { EditorContainer, EditorMain, EditorWrapper, MainWrap, Wrapper } from './addLoreStyling';
 
 interface AddLoreContentProps {
   selectedNft?: any;
@@ -100,12 +78,11 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
 
   return (
     <Wrapper>
-      <Container>
-        <PostLoreHeader title={'token name'}></PostLoreHeader>
+      <PostLoreHeader title={'token name'}></PostLoreHeader>
 
-        <MainWrap>
-          <EditorMain>
-            {/* <HeaderContainer>
+      <MainWrap>
+        <EditorMain>
+          {/* <HeaderContainer>
                 <AddLoreHeader>
                   <ImgContainer>
                     <ImgWrap url={imageSrc} name={selectedNft?.name} />
@@ -118,7 +95,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
                   </HeaderContent>
                 </AddLoreHeader>
               </HeaderContainer> */}
-            {/* <HeadingWrap>
+          {/* <HeadingWrap>
               <HeadingSecondary>Choose the type of Lore you are writing</HeadingSecondary>
               {guidePrompt !== null && (
                 <SeeWritingPrompt onClick={() => setShowPrompt(true)}>
@@ -126,29 +103,28 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
                 </SeeWritingPrompt>
               )}
             </HeadingWrap> */}
-            {/* <LoreDropdown setLoreType={setLoreType} loreType={loreType} slug={slug} selectedNft={selectedNft} /> */}
-            <EditorWrapper>
-              <EditorContainer>
-                <Editor
-                  reInit
-                  editorRef={setEditor}
-                  options={{
-                    placeholder: 'Enter for new paragraph',
-                    autofocus: true,
-                    onReady: () => {
-                      console.count('READY callback 1234');
-                    },
-                    // onChange: () => {
-                    //   setIsLoreContentAdded(true);
-                    // },
-                  }}
-                  data={loreContent}
-                />
-              </EditorContainer>
-            </EditorWrapper>
-          </EditorMain>
-        </MainWrap>
-      </Container>
+          {/* <LoreDropdown setLoreType={setLoreType} loreType={loreType} slug={slug} selectedNft={selectedNft} /> */}
+          <EditorWrapper>
+            <EditorContainer>
+              <Editor
+                reInit
+                editorRef={setEditor}
+                options={{
+                  placeholder: 'Enter for new paragraph',
+                  autofocus: true,
+                  onReady: () => {
+                    console.count('READY callback 1234');
+                  },
+                  // onChange: () => {
+                  //   setIsLoreContentAdded(true);
+                  // },
+                }}
+                data={loreContent}
+              />
+            </EditorContainer>
+          </EditorWrapper>
+        </EditorMain>
+      </MainWrap>
     </Wrapper>
   );
 };

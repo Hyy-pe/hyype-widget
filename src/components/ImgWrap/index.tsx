@@ -9,12 +9,5 @@ export interface ImgWrapProps {
 export default function ImgWrap(props: ImgWrapProps) {
   const { imgUrl, onClick } = props;
 
-
-  return (
-    <ImgContainer
-      imgUrl={imgUrl}
-      onClick={onClick}
-    />
-  )
-
+  return <ImgContainer imgUrl={imgUrl} onClick={onClick} />;
 }
