@@ -7,7 +7,7 @@ export const WidgetWrapper = styled.div<{ width?: string | number }>`
   font-variant: none;
   min-width: 320px;
   margin: 16px; // delete it
-  padding: 28px 20px;
+  // padding: 28px 20px;
 
   width: ${({ width }) => width && (isNaN(Number(width)) ? width : `${width}px`)};
   background-color: ${({ theme }) => theme.container};
