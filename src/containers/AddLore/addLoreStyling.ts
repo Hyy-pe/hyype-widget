@@ -18,6 +18,29 @@ interface ImgContainer {
 interface MainWrapProps {
   isCanon?: boolean;
 }
+
+export const EditorMain = styled.div`
+  background: #ffffff;
+  border-radius: 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  padding: 24px 20px 20px 20px;
+  width: 100%;
+`;
+
+export const LoreDropdownWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+// export const EditorContainer = styled.div`
+//   background-color: inherit;
+//   word-break: break-word;
+// `;
+
+// old styles
 export const Wrapper = styled.div`
   display: flex;
   width: 90%;
@@ -39,18 +62,18 @@ export const MainWrap = styled.div`
   width: 100%;
   justify-content: center;
 `;
-export const Main = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  padding: 28px 20px;
-  background: #ffffff;
-  border: 1px solid #dfdfdf;
-  box-sizing: border-box;
-  border-radius: 14px;
-  min-height: 65vh;
-  width: 100%;
-`;
+// export const Main = styled.div`
+//   display: flex;
+//   flex-flow: column nowrap;
+//   justify-content: flex-start;
+//   padding: 28px 20px;
+//   background: #ffffff;
+//   border: 1px solid #dfdfdf;
+//   box-sizing: border-box;
+//   border-radius: 14px;
+//   min-height: 65vh;
+//   width: 100%;
+// `;
 export const Heading = styled.h1`
   font-size: 28px;
   letter-spacing: 0.62;
@@ -104,10 +127,6 @@ export const ImgContainer = styled.div`
 export const EditorWrapper = styled.div`
   width: 80%;
   color: #000;
-`;
-export const EditorContainer = styled.div`
-  background-color: inherit;
-  word-break: break-word;
 `;
 
 export const ImageUploadArea = styled.div`
@@ -197,20 +216,6 @@ export const ImageUploadDetails = styled.div`
   justify-content: center;
   padding: 32px;
   height: 100%;
-`;
-
-export const EditorMain = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  padding: 28px 20px;
-  background: #ffffff;
-  border: 1px solid #dfdfdf;
-  border-radius: 14px;
-  box-sizing: border-box;
-  width: 65%;
-  min-height: 95%;
-  margin: 32px;
 `;
 
 export const PromptWrap = styled.div`

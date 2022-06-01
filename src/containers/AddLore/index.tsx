@@ -1,11 +1,13 @@
 // import dynamic from 'next/dynamic';
 // import { useRouter } from 'next/router';
 import Editor from 'components/Editor/Editor';
+import LoreDropdown from 'components/LoreDropdown';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
+import { HeaderInfo } from 'components/PostLore/postLoreHeaderStyling';
 import React, { FC, useEffect, useState } from 'react';
 
 // import useCommon from 'contexts/CommonProvider/useCommon';
-import { EditorContainer, EditorMain, EditorWrapper, MainWrap, Wrapper } from './addLoreStyling';
+import { EditorMain, EditorWrapper, LoreDropdownWrap, MainWrap, Wrapper } from './addLoreStyling';
 
 interface AddLoreContentProps {
   selectedNft?: any;
@@ -17,18 +19,14 @@ interface AddLoreContentProps {
   showConfirmPrompt?: boolean;
   hidePrompt?: any;
   userMeta?: any;
-  setLoreType?: any;
   getPreviousStep?: any;
   loreContent?: any;
-  loreType?: any;
 }
 
 const AddLoreContent: FC<AddLoreContentProps> = ({
   selectedNft,
   setEditor,
   setIsLoreContentAdded,
-  setLoreType,
-  loreType,
   getPreviousStep,
   loreContent,
 }) => {
@@ -36,6 +34,8 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   const [videoSrc, setVideoSrc] = useState('#t=0.1');
   const [showPrompt, setShowPrompt] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [loreType, setLoreType] = useState('Collector Statement');
 
   const [guidePrompt, setGuidePrompt] = useState<any[] | null>(null);
   const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
@@ -82,46 +82,40 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
 
       <MainWrap>
         <EditorMain>
-          {/* <HeaderContainer>
-                <AddLoreHeader>
-                  <ImgContainer>
-                    <ImgWrap url={imageSrc} name={selectedNft?.name} />
-                  </ImgContainer>
-                  <HeaderContent>
-                    <Heading>Let’s write about</Heading>
-                    <Subheading>
-                      Avastar #123
-                    </Subheading>
-                  </HeaderContent>
-                </AddLoreHeader>
-              </HeaderContainer> */}
           {/* <HeadingWrap>
-              <HeadingSecondary>Choose the type of Lore you are writing</HeadingSecondary>
               {guidePrompt !== null && (
                 <SeeWritingPrompt onClick={() => setShowPrompt(true)}>
-                  See Writing prompt
+                See Writing prompt
                 </SeeWritingPrompt>
-              )}
-            </HeadingWrap> */}
-          {/* <LoreDropdown setLoreType={setLoreType} loreType={loreType} slug={slug} selectedNft={selectedNft} /> */}
+                )}
+              </HeadingWrap> */}
           <EditorWrapper>
-            <EditorContainer>
-              <Editor
-                reInit
-                editorRef={setEditor}
-                options={{
-                  placeholder: 'Enter for new paragraph',
-                  autofocus: true,
-                  onReady: () => {
-                    console.count('READY callback 1234');
-                  },
-                  // onChange: () => {
-                  //   setIsLoreContentAdded(true);
-                  // },
-                }}
-                data={loreContent}
+            <LoreDropdownWrap>
+              <HeaderInfo>Select the type of lore</HeaderInfo>
+              <LoreDropdown
+                setLoreType={setLoreType}
+                loreType={loreType}
+                slug={slug}
+                selectedNft={selectedNft}
               />
-            </EditorContainer>
+            </LoreDropdownWrap>
+            {/* <EditorContainer> */}
+            <Editor
+              reInit
+              editorRef={setEditor}
+              options={{
+                placeholder: 'Enter for new paragraph',
+                autofocus: true,
+                onReady: () => {
+                  console.count('READY callback 1234');
+                },
+                // onChange: () => {
+                //   setIsLoreContentAdded(true);
+                // },
+              }}
+              data={loreContent}
+            />
+            {/* </EditorContainer> */}
           </EditorWrapper>
         </EditorMain>
       </MainWrap>

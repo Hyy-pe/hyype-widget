@@ -19,7 +19,7 @@ export default function PostLoreHeader(props: PostLoreHeaderProps) {
 
       <HeaderText>
         <HeaderInfo>Let’s share about</HeaderInfo>
-        <Header>Your Perspective</Header>
+        <Header>Avastar #123</Header>
       </HeaderText>
     </HeaderWrap>
   );
