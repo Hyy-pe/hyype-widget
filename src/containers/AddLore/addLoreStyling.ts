@@ -107,7 +107,7 @@ export const EditorWrapper = styled.div`
   color: #000;
 `;
 export const EditorContainer = styled.div`
-  background-color: #fff;
+  background-color: inherit;
   word-break: break-word;
 `;
 

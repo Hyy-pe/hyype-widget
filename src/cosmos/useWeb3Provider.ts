@@ -16,8 +16,8 @@ const [walletConnect] = initializeConnector<WalletConnect>(
   (actions) => new WalletConnect(actions, { rpc: INFURA_NETWORK_URLS }),
 );
 
-export default function useProvider() {
-  const connectorType = useOption('provider', { options: [Wallet.MetaMask, Wallet.WalletConnect] });
+export default function useWeb3Provider() {
+  const connectorType: any = useOption('web3Provider', { options: [Wallet.MetaMask, Wallet.WalletConnect] });
   const [connector, setConnector] = useState<Connector>();
   useEffect(() => {
     let stale = false;
