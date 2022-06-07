@@ -56,8 +56,6 @@ const Dropdown: FC<LoreDropdownProps> = ({ setLoreType, loreType, slug, selected
     );
   }
 
-  console.log('>>> collectionTags: ', collectionTags);
-
   return (
     <Container>
       <LoreTypeButton

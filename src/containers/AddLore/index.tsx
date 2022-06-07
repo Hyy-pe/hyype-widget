@@ -1,16 +1,15 @@
-// import dynamic from 'next/dynamic';
-// import { useRouter } from 'next/router';
 import Editor from 'components/Editor/Editor';
 import LoreDropdown from 'components/LoreDropdown';
-import PostLoreHeader from 'components/PostLore/PostLoreHeader';
 import PostLoreFooter from 'components/PostLore/PostLoreFooter';
+import PostLoreHeader from 'components/PostLore/PostLoreHeader';
 import { HeaderInfo } from 'components/PostLore/postLoreHeaderStyling';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
-// import useCommon from 'contexts/CommonProvider/useCommon';
 import { EditorMain, EditorWrapper, LoreDropdownWrap, MainWrap, Wrapper } from './addLoreStyling';
 
 interface AddLoreContentProps {
+  nft?: any;
+
   selectedNft?: any;
   setEditor?: any;
   editor?: any;
@@ -25,13 +24,12 @@ interface AddLoreContentProps {
 }
 
 const AddLoreContent: FC<AddLoreContentProps> = ({
+  nft = {},
+
   selectedNft,
   setEditor,
-  setIsLoreContentAdded,
-  getPreviousStep,
   loreContent,
 }) => {
-  const [imageSrc, setImageSrc] = useState('');
   const [videoSrc, setVideoSrc] = useState('#t=0.1');
   const [showPrompt, setShowPrompt] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,41 +39,9 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   const [guidePrompt, setGuidePrompt] = useState<any[] | null>(null);
   const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
 
-  const imageLoader = new Image();
-
-  useEffect(() => {
-    const getPrompt = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/${slug}/config`);
-        const prompts = await res.json();
-        if (prompts?.data?.lorePrompt?.values.length > 0) {
-          setGuidePrompt(prompts?.data?.lorePrompt?.values);
-        }
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-      }
-    };
-    getPrompt();
-  }, [slug]);
-  imageLoader.src =
-    selectedNft?.metadata?.cachedMedia?.imageUrl ||
-    selectedNft?.metadata?.cachedMedia?.videoThumbnail ||
-    selectedNft?.metadata?.imageUrl ||
-    '';
-
-  imageLoader.onload = () => {
-    setImageSrc(
-      selectedNft?.metadata?.cachedMedia?.imageUrl ||
-        selectedNft?.metadata?.cachedMedia?.videoThumbnail ||
-        selectedNft?.metadata?.imageUrl ||
-        '',
-    );
-  };
-
   return (
     <Wrapper>
-      <PostLoreHeader title={'token name'}></PostLoreHeader>
+      <PostLoreHeader nft={nft} title={'token name'}></PostLoreHeader>
 
       <MainWrap>
         <EditorMain>
