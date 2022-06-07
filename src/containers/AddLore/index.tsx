@@ -3,6 +3,7 @@
 import Editor from 'components/Editor/Editor';
 import LoreDropdown from 'components/LoreDropdown';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
+import PostLoreFooter from 'components/PostLore/PostLoreFooter';
 import { HeaderInfo } from 'components/PostLore/postLoreHeaderStyling';
 import React, { FC, useEffect, useState } from 'react';
 
@@ -72,23 +73,12 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
     );
   };
 
-  // const { useWindowDimensions } = useCommon();
-  // const { width } = useWindowDimensions();
-  // const router = useRouter();
-
   return (
     <Wrapper>
       <PostLoreHeader title={'token name'}></PostLoreHeader>
 
       <MainWrap>
         <EditorMain>
-          {/* <HeadingWrap>
-              {guidePrompt !== null && (
-                <SeeWritingPrompt onClick={() => setShowPrompt(true)}>
-                See Writing prompt
-                </SeeWritingPrompt>
-                )}
-              </HeadingWrap> */}
           <EditorWrapper>
             <LoreDropdownWrap>
               <HeaderInfo>Select the type of lore</HeaderInfo>
@@ -99,7 +89,6 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
                 selectedNft={selectedNft}
               />
             </LoreDropdownWrap>
-            {/* <EditorContainer> */}
             <Editor
               reInit
               editorRef={setEditor}
@@ -107,7 +96,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
                 placeholder: 'Enter for new paragraph',
                 autofocus: true,
                 onReady: () => {
-                  console.count('READY callback 1234');
+                  console.count('Check callback 1234!');
                 },
                 // onChange: () => {
                 //   setIsLoreContentAdded(true);
@@ -115,10 +104,10 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
               }}
               data={loreContent}
             />
-            {/* </EditorContainer> */}
           </EditorWrapper>
         </EditorMain>
       </MainWrap>
+      <PostLoreFooter btnText="Connect Wallet" />
     </Wrapper>
   );
 };
