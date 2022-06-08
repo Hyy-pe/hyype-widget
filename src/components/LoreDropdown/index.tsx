@@ -1,24 +1,28 @@
-// import { useRouter } from 'next/router';
+import { fetchCommunityLoreTags } from 'api/collection';
 import { Drop } from 'components';
-// import { getLoreTags, getNftData } from '../../../pages/api/data';
 import { FC, useEffect, useState } from 'react';
-
 import { Container, LoreTypeButton, Option } from './loreDropdownStyling';
-// import { LoadingAnimation } from 'components/FormFields/commonStyling';
 
 interface LoreDropdownProps {
+  contractAddress: string;
   setLoreType: any;
   loreType: any;
   slug: string;
   selectedNft?: any;
 }
 
-const Dropdown: FC<LoreDropdownProps> = ({ setLoreType, loreType, slug, selectedNft }) => {
+const Dropdown: FC<LoreDropdownProps> = ({
+  contractAddress = '',
+  setLoreType,
+  loreType,
+  slug,
+  selectedNft,
+}) => {
   // const router = useRouter();
 
   const nft = ''; // router.query?.nft || selectedNft || '';
   const [dropdown, setDropdown] = useState(false);
-  const [collectionTags, setCollectionTags] = useState(['']);
+  const [loreTags, setLoreTags] = useState<any | ['']>(['']);
   const [isLoading, setIsLoading] = useState(false);
 
   const DefaultDropdownOptions = [
@@ -31,7 +35,23 @@ const Dropdown: FC<LoreDropdownProps> = ({ setLoreType, loreType, slug, selected
   ];
 
   useEffect(() => {
-    setCollectionTags(DefaultDropdownOptions);
+    try {
+      setIsLoading(true);
+
+      const getLoreTags = async () => {
+        const loreTags = await fetchCommunityLoreTags({
+          contractAddress,
+        });
+
+        setLoreTags(loreTags);
+      };
+      getLoreTags();
+    } catch (error) {
+      setLoreTags(DefaultDropdownOptions);
+      console.log('err getCommunityLoreTags: ', error);
+    }
+
+    setIsLoading(false);
   }, [slug]);
 
   if (isLoading) {
@@ -78,7 +98,7 @@ const Dropdown: FC<LoreDropdownProps> = ({ setLoreType, loreType, slug, selected
         {loreType}
       </LoreTypeButton>
       <Drop show={dropdown} onClose={() => setDropdown(false)} align="right">
-        {collectionTags.map((tag, index) => {
+        {loreTags.map((tag, index) => {
           return (
             <Option
               key={`dropdown_${index}`}

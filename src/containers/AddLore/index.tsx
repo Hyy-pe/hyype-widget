@@ -8,6 +8,7 @@ import React, { FC, useState } from 'react';
 import { EditorMain, EditorWrapper, LoreDropdownWrap, MainWrap, Wrapper } from './addLoreStyling';
 
 interface AddLoreContentProps {
+  contractAddress: string;
   nft?: any;
 
   selectedNft?: any;
@@ -25,6 +26,7 @@ interface AddLoreContentProps {
 
 const AddLoreContent: FC<AddLoreContentProps> = ({
   nft = {},
+  contractAddress = '',
 
   selectedNft,
   setEditor,
@@ -49,6 +51,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
             <LoreDropdownWrap>
               <HeaderInfo>Select the type of lore</HeaderInfo>
               <LoreDropdown
+                contractAddress={contractAddress}
                 setLoreType={setLoreType}
                 loreType={loreType}
                 slug={slug}
