@@ -18,13 +18,6 @@ interface AddLoreContentProps {
   selectedNft?: any;
   setEditor?: any;
   editor?: any;
-  clearData?: any;
-  setIsLoreContentAdded?: any;
-  isLoreContentAdded?: boolean;
-  showConfirmPrompt?: boolean;
-  hidePrompt?: any;
-  userMeta?: any;
-  getPreviousStep?: any;
   loreContent?: any;
 }
 
@@ -35,30 +28,15 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   web3Provider,
 
   selectedNft,
-  setEditor,
   loreContent,
 }) => {
   // const [nonce, setNonce] = useState<any | null>(null);
+  const [editor, setEditor] = useState<any>(null);
   const [btnText, setBtnText] = useState<string>('Post Lore');
 
   const [loreType, setLoreType] = useState('Collector Statement');
 
   const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
-
-  // TODO: make the editor data dynamic
-  const editorContent = {
-    time: 1654815115394,
-    blocks: [
-      {
-        id: 'IiWTcTOyrF',
-        type: 'paragraph',
-        data: {
-          text: 'This is the second lore posting from Hyype widget!!',
-        },
-      },
-    ],
-    version: '2.24.3',
-  };
 
   // sign the message from wallet popup
   const doSign = async (nonce: any) => {
@@ -108,6 +86,8 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       // post lore
       setBtnText('Posting ...');
 
+      const editorContent = await editor?.save();
+
       const payload = {
         signedMessage: sign,
         walletAddress,
@@ -149,9 +129,11 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
                 selectedNft={selectedNft}
               />
             </LoreDropdownWrap>
+
+            {/* editor js */}
             <Editor
               reInit
-              editorRef={setEditor}
+              setEditor={setEditor}
               options={{
                 placeholder: 'Enter for new paragraph',
                 autofocus: true,
@@ -167,6 +149,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
           </EditorWrapper>
         </EditorMain>
       </MainWrap>
+
       <PostLoreFooter btnText={btnText} onClick={signAndPostLore} />
     </Wrapper>
   );

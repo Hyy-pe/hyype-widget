@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
+import React, { useEffect, useState } from 'react';
+
 import { tools } from './tools';
 
 /**
- *
  * @param {EditorJS.Tool[]} toolsList
  * @param {*} param1
  * @param {EditorJS.EditorConfig} options
  */
-export const useEditor = (toolsList: any, { data, editorRef }: any, options: any = {}) => {
-  const [editorInstance, setEditor] = useState<any>(null);
+export const useEditor = (toolsList: any, { data, setEditor }: any, options: any = {}) => {
+  const [editorInstance, setEditorInstance] = useState<any>(null);
   const { data: ignoreData, tools: ignoreTools, holder: ignoreHolder, ...editorOptions } = options;
 
   // initialize
@@ -40,14 +40,14 @@ export const useEditor = (toolsList: any, { data, editorRef }: any, options: any
       ...editorOptions,
     });
 
-    setEditor(editor);
+    setEditorInstance(editor);
 
     // cleanup
     return () => {
       editor.isReady
         .then(() => {
           editor.destroy();
-          setEditor(null);
+          setEditorInstance(null);
         })
         .catch((e) => console.error('ERROR editor cleanup', e));
     };
@@ -58,17 +58,17 @@ export const useEditor = (toolsList: any, { data, editorRef }: any, options: any
     if (!editorInstance) {
       return;
     }
-    // Send instance to the parent
-    if (editorRef) {
-      editorRef(editorInstance);
+    // Send editor instance to the parent
+    if (setEditor) {
+      setEditor(editorInstance);
     }
-  }, [editorInstance, editorRef]);
+  }, [editorInstance, setEditor]);
 
   return { editor: editorInstance };
 };
 
-const Editor = ({ editorRef, children, data, options }: any) => {
-  useEditor(tools, { data, editorRef }, options);
+const Editor = ({ setEditor, children, data, options }: any) => {
+  useEditor(tools, { data, setEditor }, options);
 
   return (
     <React.Fragment>

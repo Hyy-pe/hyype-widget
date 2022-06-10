@@ -1,6 +1,6 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { fetchNftDetails } from 'api/nft';
 import { Provider as Eip1193Provider } from '@web3-react/types';
+import { fetchNftDetails } from 'api/nft';
 import { WIDGET_MIN_WIDTH } from 'constants/misc';
 import AddLore from 'containers/AddLore';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -62,11 +62,8 @@ export default function Widget(props: WidgetProps) {
   //   );
 
   if (!web3Provider) {
-    return <h3>Connect wallet from right side!</h3>;
+    return <h3>Select web3Provider from right side dropdown option!</h3>;
   }
-
-  //   return null;
-  // };
 
   return (
     <ThemeProvider theme={theme}>
