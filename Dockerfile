@@ -11,6 +11,7 @@ ADD ./package.json ./
 COPY . .
 RUN apk add --no-cache git curl
 RUN npm i react-cosmos -g
+RUN yarn
 
 CMD ["yarn", "cosmos"]
 #RUN ls build
