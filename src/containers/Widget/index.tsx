@@ -20,7 +20,7 @@ export type WidgetProps = {
 };
 
 export default function Widget(props: WidgetProps) {
-  const { web3Provider, contractAddress, tokenId = '', clientId, theme, className } = props;
+  const { web3Provider, contractAddress = '', tokenId = '', clientId, theme, className } = props;
   const [showEditor, setShowEditor] = useState(true);
   const [nft, setNft] = useState<any | null>(null);
 
@@ -61,9 +61,9 @@ export default function Widget(props: WidgetProps) {
   //     clientId,
   //   );
 
-  //   if (!web3Provider) {
-  //     return <Alert>Please provide the web3Provider!</Alert>;
-  //   }
+  if (!web3Provider) {
+    return <h3>Connect wallet from right side!</h3>;
+  }
 
   //   return null;
   // };
@@ -74,7 +74,12 @@ export default function Widget(props: WidgetProps) {
         {/* {checkRequiredFields()} */}
 
         {showEditor ? (
-          <AddLore contractAddress={contractAddress} nft={nft} />
+          <AddLore
+            contractAddress={contractAddress}
+            nft={nft}
+            tokenId={tokenId}
+            web3Provider={web3Provider}
+          />
         ) : (
           <Button onClick={() => setShowEditor(true)}>Post Lore</Button>
         )}

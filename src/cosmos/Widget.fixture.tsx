@@ -9,10 +9,12 @@ function Fixture() {
   const web3Provider = useWeb3Provider();
   const [theme, setTheme] = useValue('theme', { defaultValue: { ...defaultTheme } });
   const [contractAddress] = useValue('contractAddress', {
-    defaultValue: '0x8a90cab2b38dba80c64b7734e58ee1db38b8992e',
+    defaultValue: '0xa76ebc37e23bc7f20d62156ad88f2f29bf1e0d3a',
   });
-  const [tokenId] = useValue('tokenId', { defaultValue: '6483' });
-  const [clientId] = useValue('clientId', { defaultValue: '' });
+  const [tokenId] = useValue('tokenId', { defaultValue: '233' });
+  const [clientId] = useValue('clientId', {
+    defaultValue: 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad',
+  });
   const [width] = useValue('width', { defaultValue: '720' });
 
   return (

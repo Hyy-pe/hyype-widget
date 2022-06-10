@@ -18,8 +18,6 @@ const Dropdown: FC<LoreDropdownProps> = ({
   slug,
   selectedNft,
 }) => {
-  // const router = useRouter();
-
   const nft = ''; // router.query?.nft || selectedNft || '';
   const [dropdown, setDropdown] = useState(false);
   const [loreTags, setLoreTags] = useState<any | ['']>(['']);
