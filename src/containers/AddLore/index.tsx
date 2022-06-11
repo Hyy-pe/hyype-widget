@@ -1,3 +1,5 @@
+import { getNonce, postLore } from 'api/lore';
+import { Buffer } from 'buffer';
 import Editor from 'components/Editor/Editor';
 import LoreDropdown from 'components/LoreDropdown';
 import PostLoreFooter from 'components/PostLore/PostLoreFooter';
@@ -8,7 +10,10 @@ import React, { FC, useState } from 'react';
 import { EditorMain, EditorWrapper, LoreDropdownWrap, MainWrap, Wrapper } from './addLoreStyling';
 
 interface AddLoreContentProps {
+  contractAddress: string;
   nft?: any;
+  tokenId?: string;
+  web3Provider: any;
 
   selectedNft?: any;
   setEditor?: any;
@@ -24,20 +29,108 @@ interface AddLoreContentProps {
 }
 
 const AddLoreContent: FC<AddLoreContentProps> = ({
+  contractAddress = '',
   nft = {},
+  tokenId,
+  web3Provider,
 
   selectedNft,
   setEditor,
   loreContent,
 }) => {
-  const [videoSrc, setVideoSrc] = useState('#t=0.1');
-  const [showPrompt, setShowPrompt] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [nonce, setNonce] = useState<any | null>(null);
+  const [btnText, setBtnText] = useState<string>('Post Lore');
 
   const [loreType, setLoreType] = useState('Collector Statement');
 
-  const [guidePrompt, setGuidePrompt] = useState<any[] | null>(null);
   const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
+
+  // TODO: make the editor data dynamic
+  const editorContent = {
+    time: 1654815115394,
+    blocks: [
+      {
+        id: 'IiWTcTOyrF',
+        type: 'paragraph',
+        data: {
+          text: 'This is the second lore posting from Hyype widget!!',
+        },
+      },
+    ],
+    version: '2.24.3',
+  };
+
+  // sign the message from wallet popup
+  const doSign = async (nonce: any) => {
+    try {
+      let nonceMsg = `Post a lore on Hyype by verifying your wallet address. One time code : ${nonce}`;
+      nonceMsg = Buffer.from(nonceMsg).toString('hex');
+
+      const from = web3Provider.selectedAddress; // wallet
+
+      const sign = await web3Provider.request({
+        method: 'personal_sign',
+        params: [nonceMsg, from, ''],
+      });
+
+      return sign;
+    } catch (error) {
+      console.log('err doSign: ', doSign);
+      return '';
+    }
+  };
+
+  // get nonce | sign message | post lore
+  const signAndPostLore = async () => {
+    try {
+      setBtnText('Waiting to Sign ...');
+      const walletAddress = web3Provider?.selectedAddress;
+
+      const nonce = await getNonce({
+        address: walletAddress,
+        action: 'CREATE_LORE',
+      });
+
+      if (!nonce) {
+        console.log('err nonce: ');
+        setBtnText('Post Lore');
+        return;
+      }
+
+      // sign
+      const sign = await doSign(nonce);
+
+      if (!sign) {
+        setBtnText('Post Lore');
+        return;
+      }
+
+      // post lore
+      setBtnText('Posting ...');
+
+      const payload = {
+        signedMessage: sign,
+        walletAddress,
+        lore: {
+          type: loreType,
+          tokenId,
+          contractAddress,
+          loreDetails: editorContent,
+          // loreData: '<p>This is the first lore posting from Hyype widget!!</p>',
+        },
+      };
+
+      const postLoreRest = await postLore({ payload });
+
+      if (postLoreRest?.loreId) {
+        console.log('>>> YESSS, LORE IS POSTED!');
+      }
+    } catch (error) {
+      console.log('err signAndPostLore: ', error);
+    }
+
+    setBtnText('Post Lore');
+  };
 
   return (
     <Wrapper>
@@ -49,6 +142,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
             <LoreDropdownWrap>
               <HeaderInfo>Select the type of lore</HeaderInfo>
               <LoreDropdown
+                contractAddress={contractAddress}
                 setLoreType={setLoreType}
                 loreType={loreType}
                 slug={slug}
@@ -73,7 +167,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
           </EditorWrapper>
         </EditorMain>
       </MainWrap>
-      <PostLoreFooter btnText="Connect Wallet" />
+      <PostLoreFooter btnText={btnText} onClick={signAndPostLore} />
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
+import { fetchNftDetails } from 'api/nft';
 import { Provider as Eip1193Provider } from '@web3-react/types';
-import { BASE_API_URL } from 'constants/api';
 import { WIDGET_MIN_WIDTH } from 'constants/misc';
 import AddLore from 'containers/AddLore';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -20,9 +20,9 @@ export type WidgetProps = {
 };
 
 export default function Widget(props: WidgetProps) {
-  const { web3Provider, contractAddress, tokenId, clientId, theme, className } = props;
-  const [isLorePosting, setIsLorePosting] = useState(true);
-  const [nft, setNft] = useState<object | null>(null);
+  const { web3Provider, contractAddress = '', tokenId = '', clientId, theme, className } = props;
+  const [showEditor, setShowEditor] = useState(true);
+  const [nft, setNft] = useState<any | null>(null);
 
   const width = useMemo(() => {
     const { width } = props;
@@ -37,20 +37,16 @@ export default function Widget(props: WidgetProps) {
   }, [props.width]);
 
   useEffect(() => {
-    const getNftDetails = async () => {
-      const url = `${BASE_API_URL}/token/${contractAddress}/${tokenId}?refresh=false`;
-
-      try {
-        let nft = await fetch(url);
-        nft = await nft.json();
-
+    try {
+      const getNftDetails = async () => {
+        const nft = await fetchNftDetails({ contractAddress, tokenId });
         setNft(nft);
-      } catch (error) {
-        console.log('err getNftDetails: ', error);
-      }
-    };
+      };
 
-    getNftDetails();
+      getNftDetails();
+    } catch (error) {
+      console.log('err getNftDetails: ', error);
+    }
   }, [contractAddress, tokenId]);
 
   // const checkRequiredFields = () => {
@@ -65,9 +61,9 @@ export default function Widget(props: WidgetProps) {
   //     clientId,
   //   );
 
-  //   if (!web3Provider) {
-  //     return <Alert>Please provide the web3Provider!</Alert>;
-  //   }
+  if (!web3Provider) {
+    return <h3>Connect wallet from right side!</h3>;
+  }
 
   //   return null;
   // };
@@ -77,10 +73,15 @@ export default function Widget(props: WidgetProps) {
       <WidgetWrapper width={width}>
         {/* {checkRequiredFields()} */}
 
-        {isLorePosting ? (
-          <AddLore nft={nft} />
+        {showEditor ? (
+          <AddLore
+            contractAddress={contractAddress}
+            nft={nft}
+            tokenId={tokenId}
+            web3Provider={web3Provider}
+          />
         ) : (
-          <Button onClick={() => setIsLorePosting(true)}>Post Lore</Button>
+          <Button onClick={() => setShowEditor(true)}>Post Lore</Button>
         )}
 
         {}

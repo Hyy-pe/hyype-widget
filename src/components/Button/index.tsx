@@ -21,5 +21,5 @@ export default function Button({
   readonly,
   onClick,
 }: ButtonProps) {
-  return <PrimaryBtn>{title}</PrimaryBtn>;
+  return <PrimaryBtn onClick={onClick}>{title}</PrimaryBtn>;
 }

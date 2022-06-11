@@ -1,10 +1,9 @@
-import { useState } from 'react';
-
 import ImgWrap from 'components/ImgWrap';
+import { useState } from 'react';
 import { useEffect } from 'react';
-
-import { HeaderWrap, HeaderText, HeaderInfo, Header, HeaderImg } from './postLoreHeaderStyling';
 import { getNftImgSrc } from 'utils';
+
+import { Header, HeaderImg, HeaderInfo, HeaderText, HeaderWrap } from './postLoreHeaderStyling';
 
 export interface PostLoreHeaderProps {
   title?: string;
