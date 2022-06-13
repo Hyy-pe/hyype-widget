@@ -1,8 +1,5 @@
 import { BASE_API_URL, SANDBOX_API_URL } from 'constants/api';
-const CLIENT_POST_MESSAGE =
-  'Post a lore on Hyype by verifying your wallet address. One time code : ';
-// const CLIENT_ID = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
-const clientId = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
+const CLIENT_ID = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
 
 const URL_LORE = `${SANDBOX_API_URL}/api/v1/lore`;
 
@@ -10,13 +7,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-export const getNonce = async ({
-  address,
-  action,
-}: {
-  address: any;
-  action: string;
-}) => {
+export const getNonce = async ({ address, action }: { address: any; action: string }) => {
   const url = `${SANDBOX_API_URL}/api/v1/user/public/request-nonce`;
   const payload = {
     address,
@@ -28,7 +19,7 @@ export const getNonce = async ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'client-id': clientId,
+        'client-id': CLIENT_ID,
       },
       body: JSON.stringify(payload),
       // body: JSON.stringify(payload),
@@ -49,7 +40,7 @@ export const postLore = async ({ payload }: { payload: any }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'client-id': clientId,
+        'client-id': CLIENT_ID,
       },
       body: JSON.stringify(payload),
     });
