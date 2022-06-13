@@ -21,7 +21,8 @@
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["simple-import-sort", "unused-imports", "better-styled-components"],
+  "plugins": ["simple-import-sort", "unused-imports"],
+  // "plugins": ["simple-import-sort", "unused-imports", "better-styled-components"],
   "rules": {
     "unused-imports/no-unused-imports": "error",
     "simple-import-sort/imports": 1,
@@ -33,7 +34,7 @@
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/react-in-jsx-scope": "off",
-    "object-shorthand": ["error", "always"],
-    "better-styled-components/sort-declarations-alphabetically": "error"
+    "object-shorthand": ["error", "always"]
+    // "better-styled-components/sort-declarations-alphabetically": "error"
   }
 }

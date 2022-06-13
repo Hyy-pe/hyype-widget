@@ -73,7 +73,9 @@ const Editor = ({ setEditor, children, data, options }: any) => {
   return (
     <React.Fragment>
       {!children && <div className="container" id="editor-js"></div>}
+
       {children}
+
       <style jsx>{`
         .container {
           width: 100%;

@@ -30,7 +30,6 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   selectedNft,
   loreContent,
 }) => {
-  // const [nonce, setNonce] = useState<any | null>(null);
   const [editor, setEditor] = useState<any>(null);
   const [btnText, setBtnText] = useState<string>('Post Lore');
 
@@ -103,7 +102,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       const postLoreRest = await postLore({ payload });
 
       if (postLoreRest?.loreId) {
-        console.log('>>> YESSS, LORE IS POSTED!');
+        console.log('LORE IS POSTED!');
       }
     } catch (error) {
       console.log('err signAndPostLore: ', error);

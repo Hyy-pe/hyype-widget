@@ -1,12 +1,21 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
+import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
 import { Provider as Eip1193Provider } from '@web3-react/types';
 import { fetchNftDetails } from 'api/nft';
+import { FooterWrap } from 'components/PostLore/postLoreFooterStyling';
+import PostLoreHeaderLoader from 'components/PostLore/PostLoreHeaderLoader';
+import {
+  DescLong,
+  DescWrapLoader,
+  Spinner,
+  SpinnerWrap,
+} from 'components/PostLore/postLoreHeaderStyling';
 import { WIDGET_MIN_WIDTH } from 'constants/misc';
 import AddLore from 'containers/AddLore';
+import { EditorMain, MainWrap, Wrapper } from 'containers/AddLore/addLoreStyling';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-// import logo from './logo.svg';
 import { Button, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
@@ -22,6 +31,7 @@ export type WidgetProps = {
 export default function Widget(props: WidgetProps) {
   const { web3Provider, contractAddress = '', tokenId = '', clientId, theme, className } = props;
   const [showEditor, setShowEditor] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [nft, setNft] = useState<any | null>(null);
 
   const width = useMemo(() => {
@@ -39,8 +49,15 @@ export default function Widget(props: WidgetProps) {
   useEffect(() => {
     try {
       const getNftDetails = async () => {
-        const nft = await fetchNftDetails({ contractAddress, tokenId });
-        setNft(nft);
+        try {
+          setIsLoading(true);
+          const nft = await fetchNftDetails({ contractAddress, tokenId });
+
+          setNft(nft);
+          setIsLoading(false);
+        } catch (error) {
+          console.log('error getNftDetails: ', getNftDetails);
+        }
       };
 
       getNftDetails();
@@ -63,6 +80,32 @@ export default function Widget(props: WidgetProps) {
 
   if (!web3Provider) {
     return <h3>Select web3Provider from right side dropdown option!</h3>;
+  }
+
+  if (isLoading) {
+    return (
+      <ThemeProvider theme={theme}>
+        <WidgetWrapper width={width}>
+          <Wrapper>
+            <PostLoreHeaderLoader />
+
+            <MainWrap style={{ minHeight: '600px' }}>
+              <EditorMain>
+                <SpinnerWrap>
+                  <Spinner color="#FF8162" />
+                </SpinnerWrap>
+              </EditorMain>
+            </MainWrap>
+
+            <FooterWrap>
+              <DescWrapLoader>
+                <DescLong />
+              </DescWrapLoader>
+            </FooterWrap>
+          </Wrapper>
+        </WidgetWrapper>
+      </ThemeProvider>
+    );
   }
 
   return (
