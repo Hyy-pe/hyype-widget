@@ -6,6 +6,7 @@ import LorePostedState from 'components/PostLore/LorePostedState';
 import PostLoreFooter from 'components/PostLore/PostLoreFooter';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
 import { HeaderInfo } from 'components/PostLore/postLoreHeaderStyling';
+import PoweredFooter from 'components/PoweredFooter';
 import React, { FC, useState } from 'react';
 
 import { EditorMain, EditorWrapper, LoreDropdownWrap, MainWrap, Wrapper } from './addLoreStyling';
@@ -156,6 +157,8 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       </MainWrap>
 
       <PostLoreFooter btnText={btnText} onClick={signAndPostLore} />
+
+      <PoweredFooter />
     </Wrapper>
   );
 };

@@ -1,5 +1,6 @@
-import { TickIcon, CrossIcon } from 'components/Icons';
+import { CrossIcon, TickIcon } from 'components/Icons';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
+import PoweredFooter from 'components/PoweredFooter';
 
 import { MsgBody, MsgInfo, MsgTitle, Wrapper } from './lorePostedStateStyling';
 
@@ -29,6 +30,8 @@ export default function LorePostedState({ lorePostingStatus, nft }: LorePostedSt
           {lorePostingStatus === 'success' ? SUCCESS_LORE_POST_INFO : FAILED_LORE_POST_INFO}
         </MsgInfo>
       </MsgBody>
+
+      <PoweredFooter />
     </Wrapper>
   );
 }
