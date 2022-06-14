@@ -1,5 +1,4 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
 import { Provider as Eip1193Provider } from '@web3-react/types';
 import { fetchNftDetails } from 'api/nft';
 import { FooterWrap } from 'components/PostLore/postLoreFooterStyling';
