@@ -64,7 +64,7 @@ export default function Widget(props: WidgetProps) {
     } catch (error) {
       console.log('err getNftDetails: ', error);
     }
-  }, [contractAddress, tokenId]);
+  }, [contractAddress, tokenId, web3Provider]);
 
   // const checkRequiredFields = () => {
   //   console.log(
@@ -77,6 +77,9 @@ export default function Widget(props: WidgetProps) {
   //     ' > clientId: ',
   //     clientId,
   //   );
+  // };
+
+  // checkRequiredFields();
 
   if (!web3Provider) {
     return <h3>Select web3Provider from right side dropdown option!</h3>;

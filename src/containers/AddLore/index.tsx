@@ -2,6 +2,7 @@ import { getNonce, postLore } from 'api/lore';
 import { Buffer } from 'buffer';
 import Editor from 'components/Editor/Editor';
 import LoreDropdown from 'components/LoreDropdown';
+import LorePostedState from 'components/PostLore/LorePostedState';
 import PostLoreFooter from 'components/PostLore/PostLoreFooter';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
 import { HeaderInfo } from 'components/PostLore/postLoreHeaderStyling';
@@ -31,9 +32,9 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   loreContent,
 }) => {
   const [editor, setEditor] = useState<any>(null);
-  const [btnText, setBtnText] = useState<string>('Post Lore');
-
   const [loreType, setLoreType] = useState('Collector Statement');
+  const [btnText, setBtnText] = useState<string>('Post Lore');
+  const [lorePostingStatus, setLorePostingStatus] = useState<string>('');
 
   const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
 
@@ -102,14 +103,19 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       const postLoreRest = await postLore({ payload });
 
       if (postLoreRest?.loreId) {
-        console.log('LORE IS POSTED!');
+        setLorePostingStatus('success');
       }
     } catch (error) {
       console.log('err signAndPostLore: ', error);
+      setLorePostingStatus('failed');
     }
 
     setBtnText('Post Lore');
   };
+
+  if (lorePostingStatus) {
+    return <LorePostedState lorePostingStatus={lorePostingStatus} nft={nft} />;
+  }
 
   return (
     <Wrapper>
