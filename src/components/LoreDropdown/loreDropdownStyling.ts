@@ -47,6 +47,8 @@ export const Image = styled.img`
 `;
 
 export const LoreTypeButton = styled.button`
+  display: flex;
+  align-items: center;
   background: #ffffff;
   border: 1px solid #666666;
   border-radius: 88px;

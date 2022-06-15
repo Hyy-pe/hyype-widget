@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import { OptionsWrapper } from './dropStyling';
@@ -23,6 +23,7 @@ const Drop: FC<DropProps> = ({
   show,
   onClose,
   minWidth,
+  top,
   left,
   right,
   arrowType,
