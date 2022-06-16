@@ -23,11 +23,10 @@ export const HeaderText = styled.div`
 `;
 
 export const HeaderInfo = styled.div`
-  color: rgba(0, 0, 0, 0.75);
+  color: hsla(0, 0%, 0%, 0.75);
   font-size: 12px;
   font-weight: 400;
-  line-height: 15px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 `;
 
 export const Header = styled.div``;

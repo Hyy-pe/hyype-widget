@@ -1,22 +1,22 @@
 import { Button } from 'components';
-import ImgWrap from 'components/ImgWrap';
-import { useEffect } from 'react';
 
-import { FooterWrap, FooterLeft, FooterRight } from './postLoreFooterStyling';
+import { FooterLeft, FooterRight, FooterWrap } from './postLoreFooterStyling';
 
 export interface PostLoreFooterProps {
   btnText?: string;
+  isSignRejected?: boolean;
+  isBtnLoading?: boolean;
   onClick?: any;
 }
 
 export default function PostLoreFooter(props: PostLoreFooterProps) {
-  const { btnText, onClick } = props;
+  const { btnText, isSignRejected, isBtnLoading, onClick } = props;
 
   return (
     <FooterWrap>
-      <FooterLeft>footer left</FooterLeft>
+      <FooterLeft>{isSignRejected && <p>Declined signature tx in the wallet</p>}</FooterLeft>
       <FooterRight>
-        <Button title={btnText} onClick={onClick} />
+        <Button title={btnText} isLoading={isBtnLoading} onClick={onClick} />
       </FooterRight>
     </FooterWrap>
   );

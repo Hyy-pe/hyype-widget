@@ -36,7 +36,7 @@ export const postLore = async ({ payload }: { payload: any }) => {
   try {
     const url = `${URL_LORE}/create-lore`;
 
-    const postLoreResp = await fetch(url, {
+    const resp = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export const postLore = async ({ payload }: { payload: any }) => {
       body: JSON.stringify(payload),
     });
 
-    return await postLoreResp.json();
+    return await resp.json();
   } catch (error) {
     console.log('err postLore: ', error);
   }
