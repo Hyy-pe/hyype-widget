@@ -1,4 +1,4 @@
-import { mix, transparentize } from 'polished';
+import { hsla, mix, transparentize } from 'polished';
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { ThemeProvider as StyledProvider } from 'styled-components/macro';
 
@@ -25,6 +25,8 @@ const stateColors = {
 
 export const lightTheme: Colors = {
   // surface
+  backgroundColor: 'hsla(0, 0%, 100%, 1)',
+  activeColor: 'hsla(12, 97%, 65%, 1);',
   accent: brandLight,
   container: 'hsla(0, 0%, 100%, 1)',
   module: 'hsl(231, 14%, 90%)',
@@ -33,6 +35,7 @@ export const lightTheme: Colors = {
   dialog: white,
 
   // text
+  foregroundColor: 'hsl(0, 0%, 0%);',
   onAccent: white,
   primary: black,
   secondary: 'hsl(227, 10%, 37.5%)',
