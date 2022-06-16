@@ -97,7 +97,6 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
           tokenId,
           contractAddress,
           loreDetails: editorContent,
-          // loreData: '<p>This is the first lore posting from Hyype widget!!</p>',
         },
       };
 
@@ -117,6 +116,8 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   if (lorePostingStatus) {
     return <LorePostedState lorePostingStatus={lorePostingStatus} nft={nft} />;
   }
+
+  const isBtnLoading = !['Post Lore'].includes(btnText);
 
   return (
     <Wrapper>
@@ -156,7 +157,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
         </EditorMain>
       </MainWrap>
 
-      <PostLoreFooter btnText={btnText} onClick={signAndPostLore} />
+      <PostLoreFooter btnText={btnText} isBtnLoading={isBtnLoading} onClick={signAndPostLore} />
 
       <PoweredFooter />
     </Wrapper>
