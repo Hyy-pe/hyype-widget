@@ -9,6 +9,13 @@ export const FooterWrap = styled.div`
   padding: 24px 20px 20px 20px;
 `;
 
-export const FooterLeft = styled.div``;
+export const FooterLeft = styled.div`
+  > p {
+    font-size: 12px;
+    font-weight: 500;
+    color: hsla(12, 97%, 65%, 1);
+    letter-spacing: 0.308px;
+  }
+`;
 
 export const FooterRight = styled.div``;

@@ -35,6 +35,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   const [editor, setEditor] = useState<any>(null);
   const [loreType, setLoreType] = useState('Collector Statement');
   const [btnText, setBtnText] = useState<string>('Post Lore');
+  const [isSignRejected, setIsSignRejected] = useState<boolean>(false);
   const [lorePostingStatus, setLorePostingStatus] = useState<string>('');
 
   const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
@@ -53,8 +54,13 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       });
 
       return sign;
-    } catch (error) {
-      console.log('err doSign: ', doSign);
+    } catch (error: any) {
+      console.log('err doSign: ', error);
+
+      // 4001 = User rejected the request.
+      if (error?.code === 4001) {
+        setIsSignRejected(true);
+      }
       return '';
     }
   };
@@ -100,10 +106,12 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
         },
       };
 
-      const postLoreRest = await postLore({ payload });
+      const postLoreResp = await postLore({ payload });
 
-      if (postLoreRest?.loreId) {
+      if (postLoreResp?.loreId) {
         setLorePostingStatus('success');
+      } else {
+        throw postLoreResp;
       }
     } catch (error) {
       console.log('err signAndPostLore: ', error);
@@ -157,7 +165,12 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
         </EditorMain>
       </MainWrap>
 
-      <PostLoreFooter btnText={btnText} isBtnLoading={isBtnLoading} onClick={signAndPostLore} />
+      <PostLoreFooter
+        btnText={btnText}
+        isSignRejected={isSignRejected}
+        isBtnLoading={isBtnLoading}
+        onClick={signAndPostLore}
+      />
 
       <PoweredFooter />
     </Wrapper>
