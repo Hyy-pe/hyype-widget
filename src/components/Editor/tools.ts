@@ -1,3 +1,8 @@
+import { getNonce4LoreImg, getSignedImg } from 'api/lore';
+import { Buffer } from 'buffer';
+
+import { BASE_API_URL, SANDBOX_API_URL } from 'constants/api';
+
 // @ts-ignore
 import Embed from '@editorjs/embed';
 // @ts-ignore
@@ -91,63 +96,24 @@ export const tools = {
             // get image width, height
             const { width, height }: any = await getImgResolution(inputImage);
 
-            const head = 'data:image/png;base64,';
-
-            const headers: any = {
-              Authorization: Cookies.get('User'),
-              'Content-Type': 'application/json',
-            };
-
-            const signedURL = await fetch(
-              `${process.env.NEXT_PUBLIC_API_BASE}/api/v1/user/lore/request-signed`,
-              {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({
-                  fileType: imageToUpload.type,
-                  fileWidth: width,
-                  fileHeight: height,
-                }),
-              },
-            );
-
-            const signedUrlResult = await signedURL.json();
-            if (signedURL.status !== 200 || !signedUrlResult.valid) {
-              return { valid: false };
-            }
-
-            const signedURLValue = signedUrlResult.response;
-
-            const uploadHeaders: any = {
-              'Content-Type': 'fileType',
-            };
-
-            const formData = new FormData();
-            formData.append('Content-Type', imageToUpload.type);
-            formData.append('key', signedURLValue.fields.Key);
-            formData.append('Policy', signedURLValue.fields.Policy);
-            formData.append('X-Amz-Algorithm', signedURLValue.fields['X-Amz-Algorithm']);
-            formData.append('X-Amz-Credential', signedURLValue.fields['X-Amz-Credential']);
-            formData.append('X-Amz-Date', signedURLValue.fields['X-Amz-Date']);
-            formData.append('X-Amz-Signature', signedURLValue.fields['X-Amz-Signature']);
-            formData.append('bucket', signedURLValue.fields.bucket);
-            formData.append('file', imageToUpload, 'test-1.png');
-
-            const result = await fetch(signedURLValue.url, {
-              method: 'POST',
-              body: formData,
+            const signedImg = await getSignedImg({
+              fileType: imageToUpload.type,
+              fileWidth: width,
+              fileHeight: height,
             });
 
-            if (result.status == 200 || result.status == 204) {
+            if (signedImg?.fileLocation) {
               return {
                 success: 1,
                 file: {
-                  url: signedURLValue.fileLocation,
+                  url: signedImg?.fileLocation,
                 },
               };
+            } else {
+              throw signedImg;
             }
           } catch (err) {
-            console.log(err);
+            console.log('error uploadByFile: ', err);
             return { success: 0 };
           }
         },
@@ -169,18 +135,15 @@ export const tools = {
               'Content-Type': 'application/json',
             };
 
-            const signedURL = await fetch(
-              `${process.env.NEXT_PUBLIC_API_BASE}/api/v1/user/lore/request-signed`,
-              {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({
-                  fileType,
-                  fileWidth: width,
-                  fileHeight: height,
-                }),
-              },
-            );
+            const signedURL = await fetch(`${BASE_API_URL}/api/v1/user/lore/request-signed`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                fileType,
+                fileWidth: width,
+                fileHeight: height,
+              }),
+            });
 
             const signedUrlResult = await signedURL.json();
             if (signedURL.status !== 200 || !signedUrlResult.valid) {
