@@ -1,4 +1,4 @@
-import { BASE_API_URL, SANDBOX_API_URL } from 'constants/api';
+import { BASE_API_URL } from 'constants/api';
 
 const URL_COMMUNITY = `${BASE_API_URL}/api/v1/community`;
 

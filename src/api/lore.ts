@@ -62,7 +62,7 @@ export const getSignedImg = async ({
 
     return resp?.response;
   } catch (error) {
-    console.log('err getNonce4LoreImg: ', error);
+    console.log('err getSignedImg: ', error);
   }
 };
 
