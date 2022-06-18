@@ -32,7 +32,7 @@ export const getNonce = async ({ address, action }: { address: any; action: stri
   }
 };
 
-export const getSignedImg = async ({
+export const getImgSign = async ({
   fileType,
   fileWidth,
   fileHeight,
@@ -58,11 +58,9 @@ export const getSignedImg = async ({
       body: JSON.stringify(payload),
     });
 
-    resp = await resp.json();
-
-    return resp?.response;
+    return await resp.json();
   } catch (error) {
-    console.log('err getSignedImg: ', error);
+    console.log('err getImgSign: ', error);
   }
 };
 
