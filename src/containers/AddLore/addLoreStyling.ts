@@ -125,7 +125,7 @@ export const ImgContainer = styled.div`
   overflow: hidden;
 `;
 export const EditorWrapper = styled.div`
-  width: 80%;
+  width: 95%;
   color: #000;
 `;
 

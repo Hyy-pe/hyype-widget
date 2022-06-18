@@ -1,4 +1,4 @@
-import { getSignedImg } from 'api/lore';
+import { getImgSign } from 'api/lore';
 // @ts-ignore
 import Embed from '@editorjs/embed';
 // @ts-ignore
@@ -60,6 +60,40 @@ const getImgResolution = async (inputImage: any) => {
   });
 };
 
+const uploadImgOnS3 = async (imageToUpload: any, imgSign: any) => {
+  try {
+    const imgSignFields = imgSign?.fields;
+
+    const formData: any = new FormData();
+    formData.append('Content-Type', imageToUpload.type);
+
+    Object.keys(imgSignFields).forEach((field) => {
+      formData.append(field, imgSignFields[field]);
+    });
+
+    formData.append('file', imageToUpload, 'test-1.png');
+
+    const result = await fetch(imgSign.url, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if ([200, 204].includes(result.status)) {
+      return {
+        success: 1,
+        file: {
+          url: imgSign.fileLocation,
+        },
+      };
+    } else {
+      throw result;
+    }
+  } catch (error) {
+    console.log('error uploadImgOnS3: ', uploadImgOnS3);
+    return { success: 0 };
+  }
+};
+
 export const tools = {
   paragraph: {
     class: Paragraph,
@@ -89,22 +123,18 @@ export const tools = {
             // get image width, height
             const { width, height }: any = await getImgResolution(inputImage);
 
-            const signedImg = await getSignedImg({
+            let imgSign = await getImgSign({
               fileType: imageToUpload.type,
               fileWidth: width,
               fileHeight: height,
             });
 
-            if (signedImg?.fileLocation) {
-              return {
-                success: 1,
-                file: {
-                  url: signedImg?.fileLocation,
-                },
-              };
-            } else {
-              throw signedImg;
+            if (!imgSign.valid) {
+              throw imgSign;
             }
+
+            imgSign = imgSign?.response;
+            return await uploadImgOnS3(imageToUpload, imgSign);
           } catch (err) {
             console.log('error uploadByFile: ', err);
             return { success: 0 };
@@ -118,22 +148,18 @@ export const tools = {
             // get image width, height
             const { width, height }: any = await getImgResolution(inputImage);
 
-            const signedImg = await getSignedImg({
+            let imgSign = await getImgSign({
               fileType: imageToUpload.type,
               fileWidth: width,
               fileHeight: height,
             });
 
-            if (signedImg?.fileLocation) {
-              return {
-                success: 1,
-                file: {
-                  url: signedImg?.fileLocation,
-                },
-              };
-            } else {
-              throw signedImg;
+            if (!imgSign.valid) {
+              throw imgSign;
             }
+
+            imgSign = imgSign?.response;
+            return await uploadImgOnS3(imageToUpload, imgSign);
           } catch (err) {
             console.log('error uploadByUrl: ', err);
             return { success: 0 };

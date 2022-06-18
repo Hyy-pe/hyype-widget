@@ -6,10 +6,14 @@ export const options = {
   /**
    * onReady callback
    */
-  onReady: () => { console.count('READY callback') },
+  onReady: () => {
+    console.count('READY callback');
+  },
 
   /**
    * onChange callback
    */
-  onChange: () => { console.count('CHANGE callback') },
+  onChange: () => {
+    console.count('CHANGE callback');
+  },
 };
