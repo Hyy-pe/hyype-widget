@@ -1,14 +1,14 @@
 import { BASE_API_URL, SANDBOX_API_URL } from 'constants/api';
 const CLIENT_ID = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
 
-const URL_LORE = `${SANDBOX_API_URL}/api/v1/lore`;
+const URL_LORE = `${BASE_API_URL}/api/v1/lore`;
 
 const headers = {
   'Content-Type': 'application/json',
 };
 
 export const getNonce = async ({ address, action }: { address: any; action: string }) => {
-  const url = `${SANDBOX_API_URL}/api/v1/user/public/request-nonce`;
+  const url = `${BASE_API_URL}/api/v1/user/public/request-nonce`;
   const payload = {
     address,
     action,
@@ -29,6 +29,40 @@ export const getNonce = async ({ address, action }: { address: any; action: stri
     return nonceResp?.nonce;
   } catch (error) {
     console.log('err fetchNftDetails: ', error);
+  }
+};
+
+export const getSignedImg = async ({
+  fileType,
+  fileWidth,
+  fileHeight,
+}: {
+  fileType: any;
+  fileWidth: any;
+  fileHeight: any;
+}) => {
+  const url = `${BASE_API_URL}/api/v1/public/lore/image/signed-upload-request`;
+  const payload = {
+    fileType,
+    fileWidth,
+    fileHeight,
+  };
+
+  try {
+    let resp: any = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'client-id': CLIENT_ID,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    resp = await resp.json();
+
+    return resp?.response;
+  } catch (error) {
+    console.log('err getSignedImg: ', error);
   }
 };
 
