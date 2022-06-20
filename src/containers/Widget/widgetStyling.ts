@@ -28,6 +28,21 @@ export const WidgetWrapper = styled.div<{ width?: string | number }>`
   }
 `;
 
+export const WidgetDisabledInfo = styled.p`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  color: #fc714f;
+  z-index: 1;
+
+  p:first-child {
+    color: #000;
+  }
+`;
+
 export const Button = styled.button`
   height: 36px;
   border-radius: 18px;ß

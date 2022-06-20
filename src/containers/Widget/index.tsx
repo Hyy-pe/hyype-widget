@@ -15,7 +15,7 @@ import { EditorMain, MainWrap, Wrapper } from 'containers/AddLore/addLoreStyling
 import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-import { Button, WidgetWrapper } from './widgetStyling';
+import { Button, WidgetWrapper, WidgetDisabledInfo } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
@@ -80,9 +80,14 @@ export default function Widget(props: WidgetProps) {
 
   // checkRequiredFields();
 
-  if (!web3Provider) {
-    return <h3>Select web3Provider from right side dropdown option!</h3>;
-  }
+  console.log('>>> web3Provider: ', web3Provider?.selectedAddress);
+  const isWidgetDisabled = !web3Provider?.selectedAddress || !contractAddress || !tokenId;
+
+  // if (!web3Provider) {
+  //   return <h3>Select web3Provider from right side dropdown option!</h3>;
+  // } else if (web3Provider && !web3Provider?.selectedAddress) {
+  //   return <h3>Wallet is connecting!</h3>;
+  // }
 
   if (isLoading) {
     return (
@@ -110,9 +115,21 @@ export default function Widget(props: WidgetProps) {
     );
   }
 
+  const widgetDisabledStyle = {
+    opacity: '0.5',
+    pointerEvents: 'none',
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <WidgetWrapper width={width}>
+      {isWidgetDisabled && (
+        <WidgetDisabledInfo>
+          <p>Provide the web3Provider, contractAddress, tokenId from right side!</p>
+          <p>Make sure the wallet is connected and you own the token.</p>
+        </WidgetDisabledInfo>
+      )}
+
+      <WidgetWrapper width={width} style={isWidgetDisabled ? widgetDisabledStyle : {}}>
         {/* {checkRequiredFields()} */}
 
         {showEditor ? (
