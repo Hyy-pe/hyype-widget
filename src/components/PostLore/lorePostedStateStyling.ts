@@ -26,3 +26,9 @@ export const MsgInfo = styled.p`
   margin: 0;
   font-size: 12px;
 `;
+
+export const ErrMsg = styled.p`
+  margin: 0;
+  color: #fc714f;
+  text-align: center;
+`;

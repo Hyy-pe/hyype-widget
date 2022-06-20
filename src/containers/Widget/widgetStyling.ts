@@ -33,13 +33,12 @@ export const WidgetDisabledInfo = styled.p`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 8%;
-  color: #fc714f;
   z-index: 1;
 
-  p:first-child {
-    color: #000;
+  p:not(:first-child) {
+    color: #fc714f;
   }
 `;
 

@@ -113,9 +113,9 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       } else {
         throw postLoreResp;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log('err signAndPostLore: ', error);
-      setLorePostingStatus('failed');
+      setLorePostingStatus(error?.message || 'failed');
     }
 
     setBtnText('Post Lore');
