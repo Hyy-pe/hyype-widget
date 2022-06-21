@@ -43,12 +43,10 @@ export const LoreDropdownWrap = styled.div`
 // old styles
 export const Wrapper = styled.div`
   display: flex;
-  width: 90%;
+  // width: 90%;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  // min-height: 100%;
-  // min-width: 500px;
 `;
 export const Sidebar = styled.aside`
   width: 329px;

@@ -2,7 +2,7 @@ import { CrossIcon, TickIcon } from 'components/Icons';
 import PostLoreHeader from 'components/PostLore/PostLoreHeader';
 import PoweredFooter from 'components/PoweredFooter';
 
-import { MsgBody, MsgInfo, MsgTitle, Wrapper } from './lorePostedStateStyling';
+import { ErrMsg, MsgBody, MsgInfo, MsgTitle, Wrapper } from './lorePostedStateStyling';
 
 const SUCCESS_LORE_POST_TITLE = 'Success!';
 const FAILED_LORE_POST_TITLE = 'Something went wrong';
@@ -27,7 +27,13 @@ export default function LorePostedState({ lorePostingStatus, nft }: LorePostedSt
           {lorePostingStatus === 'success' ? SUCCESS_LORE_POST_TITLE : FAILED_LORE_POST_TITLE}
         </MsgTitle>
         <MsgInfo>
-          {lorePostingStatus === 'success' ? SUCCESS_LORE_POST_INFO : FAILED_LORE_POST_INFO}
+          {lorePostingStatus === 'success' ? (
+            SUCCESS_LORE_POST_INFO
+          ) : lorePostingStatus === 'failed' ? (
+            FAILED_LORE_POST_INFO
+          ) : (
+            <ErrMsg>{lorePostingStatus}</ErrMsg>
+          )}
         </MsgInfo>
       </MsgBody>
 
