@@ -10,12 +10,16 @@ import {
   SpinnerWrap,
 } from 'components/PostLore/postLoreHeaderStyling';
 import { WIDGET_MIN_WIDTH } from 'constants/misc';
-import AddLore from 'containers/AddLore';
-import { EditorMain, MainWrap, Wrapper } from 'containers/AddLore/addLoreStyling';
+import PostLoreContainer from 'containers/PostLoreContainer';
+import {
+  EditorMain,
+  MainWrap,
+  Wrapper,
+} from 'containers/PostLoreContainer/postLoreContainerStyling';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-import { Button, WidgetWrapper, WidgetDisabledInfo } from './widgetStyling';
+import { Button, PostLoreContainerWrap, WidgetDisabledInfo, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
@@ -115,35 +119,32 @@ export default function Widget(props: WidgetProps) {
     );
   }
 
-  const widgetDisabledStyle = {
-    opacity: '0.5',
-    pointerEvents: 'none',
-  };
+  console.log('>>> isWidgetDisabled: ', isWidgetDisabled);
 
   return (
     <ThemeProvider theme={theme}>
-      {isWidgetDisabled && (
-        <WidgetDisabledInfo>
-          <p>Provide the web3Provider, contractAddress, tokenId from right side!</p>
-          <p>Make sure the wallet is connected and you own the token.</p>
-        </WidgetDisabledInfo>
-      )}
-
-      <WidgetWrapper width={width} style={isWidgetDisabled ? widgetDisabledStyle : {}}>
+      <WidgetWrapper width={width}>
         {/* {checkRequiredFields()} */}
 
-        {showEditor ? (
-          <AddLore
-            contractAddress={contractAddress}
-            nft={nft}
-            tokenId={tokenId}
-            web3Provider={web3Provider}
-          />
-        ) : (
-          <Button onClick={() => setShowEditor(true)}>Post Lore</Button>
+        {isWidgetDisabled && (
+          <WidgetDisabledInfo>
+            <p>Provide the web3Provider, contractAddress, tokenId from right side!</p>
+            <p>Make sure the wallet is connected and you own the token.</p>
+          </WidgetDisabledInfo>
         )}
 
-        {}
+        <PostLoreContainerWrap isWidgetDisabled={isWidgetDisabled}>
+          {showEditor ? (
+            <PostLoreContainer
+              contractAddress={contractAddress}
+              nft={nft}
+              tokenId={tokenId}
+              web3Provider={web3Provider}
+            />
+          ) : (
+            <Button onClick={() => setShowEditor(true)}>Post Lore</Button>
+          )}
+        </PostLoreContainerWrap>
       </WidgetWrapper>
     </ThemeProvider>
   );

@@ -1,15 +1,15 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 
 export const WidgetWrapper = styled.div<{ width?: string | number }>`
   display: flex;
   flex-direction: row;
   font-size: 16px;
   font-variant: none;
-  min-width: 320px;
   margin: 16px; // delete it
-  // padding: 28px 20px;
-
+  position: relative;
+  
   width: ${({ width }) => width && (isNaN(Number(width)) ? width : `${width}px`)};
+  min-width: 320px;
   background-color: ${({ theme }) => theme.container};
   border: 1px solid rgba(0, 0, 0, 0.75);
   border-radius: ${({ theme }) => theme.borderRadius}px;
@@ -26,6 +26,16 @@ export const WidgetWrapper = styled.div<{ width?: string | number }>`
     font-family: ${({ theme }) =>
       typeof theme.fontFamily === 'string' ? undefined : theme.fontFamily.variable};
   }
+`;
+
+export const PostLoreContainerWrap = styled.div`
+  width: 100%;
+  ${(props: { isWidgetDisabled: boolean }) =>
+    props.isWidgetDisabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `}
 `;
 
 export const WidgetDisabledInfo = styled.p`

@@ -1,4 +1,3 @@
-import { getImgSign } from 'api/lore';
 // @ts-ignore
 import Embed from '@editorjs/embed';
 // @ts-ignore
@@ -9,6 +8,7 @@ import LinkTool from '@editorjs/link';
 import Paragraph from '@editorjs/paragraph';
 // @ts-ignore
 import Quote from '@editorjs/quote';
+import { getImgSign } from 'api/lore';
 // @ts-ignore
 import SimpleVideo from 'simple-video-editorjs';
 
