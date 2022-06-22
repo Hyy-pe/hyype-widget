@@ -18,7 +18,7 @@ export const MsgBody = styled.div`
 export const MsgTitle = styled.h1`
   margin: 32px 0 16px 0;
   font-size: 20px;
-  color: hsla(0, 0%, 0%, 1);
+  color: ${({ theme }) => theme.foregroundColor};
   font-weight: 500;
 `;
 
@@ -29,6 +29,6 @@ export const MsgInfo = styled.p`
 
 export const ErrMsg = styled.p`
   margin: 0;
-  color: #fc714f;
+  color: ${({ theme }) => theme.activeColor};
   text-align: center;
 `;

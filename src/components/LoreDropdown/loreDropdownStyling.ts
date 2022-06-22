@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const OptionsWrapper = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
   border-radius: 9px;
-  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px 0 ${({ theme }) => theme.foregroundColor2};
   padding: 5px 0;
   position: absolute;
   right: 0;
@@ -50,7 +50,7 @@ export const LoreTypeButton = styled.button`
   display: flex;
   align-items: center;
   background: ${({ theme }) => theme.backgroundColor};
-  border: 1px solid #666666;
+  border: 1px solid ${({ theme }) => theme.foregroundColor};
   border-radius: ${({ theme }) => {
     console.log('theme: ', theme);
     return theme.borderRadius;
@@ -59,7 +59,7 @@ export const LoreTypeButton = styled.button`
   height: 36px;
   padding: 0 16px;
   transition: all 0.4s;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px ${({ theme }) => theme.foregroundColor3};
 
   &:hover {
     background: radial-gradient(circle, transparent 1%, rgb(255 255 255) 1%) center center / 15000%

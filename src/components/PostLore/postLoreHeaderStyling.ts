@@ -50,9 +50,9 @@ export const ImgLoader = styled.div`
   height: 64px;
   position: relative;
   overflow: hidden;
-  border: 1px solid #fff;
+  border: 1px solid ${({ theme }) => theme.buttonTextColor};
   border-radius: ${({ theme }) => theme.borderRadius}px;
-  background: hsla(0, 0%, 0%, 0.05);
+  background: ${({ theme }) => theme.foregroundColor2};
   z-index: 2;
 
   &:after {
@@ -67,11 +67,16 @@ export const ImgLoader = styled.div`
       left top,
       right top,
       from(transparent),
-      color-stop(rgba(255, 255, 255, 0.3)),
+      color-stop(${({ theme }) => theme.buttonTextColor2}),
       to(transparent)
     );
 
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      ${({ theme }) => theme.buttonTextColor2},
+      transparent
+    );
 
     /* Adding animation */
     animation: ${loading} 0.8s infinite;
@@ -90,7 +95,7 @@ export const DescWrapLoader = styled.div`
 
 export const DescShort = styled.div`
   width: 70%;
-  background-color: #d8d8d8;
+  background-color: ${({ theme }) => theme.highlightColor2};
   height: 20px;
   position: relative;
   overflow: hidden;
@@ -148,11 +153,16 @@ export const DescLong = styled.div`
       left top,
       right top,
       from(transparent),
-      color-stop(rgba(255, 255, 255, 0.2)),
+      color-stop(${({ theme }) => theme.buttonTextColor2}),
       to(transparent)
     );
 
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      ${({ theme }) => theme.buttonTextColor2},
+      transparent
+    );
 
     /* Adding animation */
     animation: ${loading} 0.8s infinite;
@@ -187,7 +197,7 @@ export const Spinner = styled(SpinnerIcon)`
   animation: ${rotate} 2s linear infinite;
 
   & circle {
-    stroke: #ff8162;
+    stroke: ${({ theme }) => theme.activeColor};
     stroke-linecap: round;
     animation: ${dash} 1.5s ease-in-out infinite;
     ${(props: SpinnerColor) =>

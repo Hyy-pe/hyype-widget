@@ -23,7 +23,7 @@ export const lightTheme: Colors = {
   backgroundColor: 'hsla(0, 0%, 100%, 1)',
 
   // text
-  foregroundColor: 'hsl(0,0%,0%)', // hsl(0,0%,0%,0.75)'
+  foregroundColor: 'hsla(0,0%,0%,1)', // hsl(0,0%,0%,0.75)'
   activeColor: 'hsla(12,97%,65%,1)',
   buttonTextColor: 'hsla(0,0%,100%,1)',
   highlightColor: 'hsla(0, 0%, 50%, 0.08)',
@@ -33,11 +33,15 @@ export const lightTheme: Colors = {
 
   // extra colors
   foregroundColor2: 'hsla(0, 0%, 0%, 0.05)',
+  foregroundColor3: 'hsla(0, 0%, 0%, 0.02)',
+  foregroundColor4: 'hsla(0, 0%, 0%, 0.75)',
   buttonTextColor2: 'hsla(0, 0%, 100%, 0.2)',
+  highlightColor2: 'hsla(0, 0%, 84%, 1)',
 
   currentColor: 'currentColor',
 };
 
+// dark theme
 export const darkTheme: Colors = {
   // surface
   backgroundColor: '#E7E7E7', // 'hsla(0, 0%, 100%, 1)',

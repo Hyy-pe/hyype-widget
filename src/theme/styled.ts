@@ -17,6 +17,9 @@ export interface Colors {
   // extra colors
   foregroundColor2: string;
   buttonTextColor2: string;
+  foregroundColor3: string;
+  foregroundColor4: string;
+  highlightColor2: string;
 
   currentColor: 'currentColor';
 }
