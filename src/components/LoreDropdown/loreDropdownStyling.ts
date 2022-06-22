@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const OptionsWrapper = styled.div`
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.backgroundColor};
   border-radius: 9px;
   box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.08);
   padding: 5px 0;
@@ -30,7 +30,7 @@ export const Option = styled.div`
   font-weight: 500;
   padding: 10px 17px;
   &:hover {
-    background: #80808014;
+    background: ${({ theme }) => theme.highlightColor};
   }
 `;
 export const ChevronDownIcon = styled(ChevronDown)`
@@ -49,13 +49,17 @@ export const Image = styled.img`
 export const LoreTypeButton = styled.button`
   display: flex;
   align-items: center;
-  background: #ffffff;
+  background: ${({ theme }) => theme.backgroundColor};
   border: 1px solid #666666;
-  border-radius: 88px;
+  border-radius: ${({ theme }) => {
+    console.log('theme: ', theme);
+    return theme.borderRadius;
+  }}px;
   cursor: pointer;
   height: 36px;
   padding: 0 16px;
   transition: all 0.4s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 
   &:hover {
     background: radial-gradient(circle, transparent 1%, rgb(255 255 255) 1%) center center / 15000%

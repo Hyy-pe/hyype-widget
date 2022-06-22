@@ -6,11 +6,11 @@ type SpinnerColor = {
 };
 
 export const HeaderWrap = styled.div`
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 24px 20px 20px 20px;
+  border-bottom: 1px solid ${({ theme }) => theme.borderColor};
 `;
 
 export const HeaderImg = styled.div`
@@ -23,7 +23,7 @@ export const HeaderText = styled.div`
 `;
 
 export const HeaderInfo = styled.div`
-  color: hsla(0, 0%, 0%, 0.75);
+  color: ${({ theme }) => theme.foregroundColor};
   font-size: 12px;
   font-weight: 400;
   margin-bottom: 12px;
@@ -51,7 +51,7 @@ export const ImgLoader = styled.div`
   position: relative;
   overflow: hidden;
   border: 1px solid #fff;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius}px;
   background: hsla(0, 0%, 0%, 0.05);
   z-index: 2;
 
@@ -72,7 +72,6 @@ export const ImgLoader = styled.div`
     );
 
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    // background: linear-gradient(90deg, transparent, red, transparent);
 
     /* Adding animation */
     animation: ${loading} 0.8s infinite;
@@ -95,8 +94,8 @@ export const DescShort = styled.div`
   height: 20px;
   position: relative;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
+  background: ${({ theme }) => theme.foregroundColor2};
+  border-radius: ${({ theme }) => theme.borderRadius}px;
 
   &:after {
     display: block;
@@ -110,11 +109,16 @@ export const DescShort = styled.div`
       left top,
       right top,
       from(transparent),
-      color-stop(rgba(255, 255, 255, 0.2)),
+      color-stop(${({ theme }) => theme.buttonTextColor2}),
       to(transparent)
     );
 
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      ${({ theme }) => theme.buttonTextColor2},
+      transparent
+    );
 
     /* Adding animation */
     animation: ${loading} 0.8s infinite;
@@ -129,8 +133,8 @@ export const DescLong = styled.div`
   margin-bottom: 17px;
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.05);
+  border-radius: ${({ theme }) => theme.borderRadius}px;
+  background: ${({ theme }) => theme.foregroundColor2};
 
   &:after {
     display: block;

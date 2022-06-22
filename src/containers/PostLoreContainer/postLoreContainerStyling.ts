@@ -20,7 +20,7 @@ interface MainWrapProps {
 }
 
 export const EditorMain = styled.div`
-  background: #ffffff;
+  background: ${({ theme }) => theme.backgroundColor};
   border-radius: 14px;
   box-sizing: border-box;
   display: flex;
@@ -34,11 +34,6 @@ export const LoreDropdownWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-// export const EditorContainer = styled.div`
-//   background-color: inherit;
-//   word-break: break-word;
-// `;
 
 // old styles
 export const Wrapper = styled.div`
@@ -60,18 +55,6 @@ export const MainWrap = styled.div`
   width: 100%;
   justify-content: center;
 `;
-// export const Main = styled.div`
-//   display: flex;
-//   flex-flow: column nowrap;
-//   justify-content: flex-start;
-//   padding: 28px 20px;
-//   background: #ffffff;
-//   border: 1px solid #dfdfdf;
-//   box-sizing: border-box;
-//   border-radius: 14px;
-//   min-height: 65vh;
-//   width: 100%;
-// `;
 export const Heading = styled.h1`
   font-size: 28px;
   letter-spacing: 0.62;

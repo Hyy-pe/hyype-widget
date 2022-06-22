@@ -1,27 +1,22 @@
 export interface Colors {
   // surface
   backgroundColor: string;
-  activeColor: string;
-  accent: string;
-  container: string;
-  module: string;
-  interactive: string;
-  outline: string;
-  dialog: string;
 
   // text
   foregroundColor: string;
-  primary: string;
-  onAccent: string;
-  secondary: string;
-  hint: string;
-  onInteractive: string;
+  activeColor: string;
+  buttonTextColor: string;
+  highlightColor: string;
 
   // state
   active: string;
   success: string;
   warning: string;
   error: string;
+
+  // extra colors
+  foregroundColor2: string;
+  buttonTextColor2: string;
 
   currentColor: 'currentColor';
 }
@@ -30,6 +25,7 @@ export type Color = keyof Colors;
 
 export interface Attributes {
   borderRadius: boolean | number;
+  borderColor: string;
   fontFamily:
     | string
     | {
@@ -37,7 +33,6 @@ export interface Attributes {
         variable: string;
       };
   fontFamilyCode: string;
-  tokenColorExtraction: boolean;
 }
 
 export interface Theme extends Partial<Attributes>, Partial<Colors> {}

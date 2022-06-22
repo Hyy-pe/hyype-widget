@@ -6,14 +6,9 @@ import type { Colors, ComputedTheme, Theme } from './styled';
 
 export * from './dynamic';
 export * from './layer';
-export type { Color, Colors, Theme } from './styled';
 export * as ThemedText from './type';
 
-const white = 'hsl(0, 0%, 100%)';
-const black = 'hsl(0, 0%, 0%)';
-
 const brandLight = 'hsl(331.3, 100%, 50%)';
-const brandDark = 'hsl(215, 79%, 51.4%)';
 export const brand = brandLight;
 
 const stateColors = {
@@ -26,43 +21,32 @@ const stateColors = {
 export const lightTheme: Colors = {
   // surface
   backgroundColor: 'hsla(0, 0%, 100%, 1)',
-  activeColor: 'hsla(12, 97%, 65%, 1);',
-  accent: brandLight,
-  container: 'hsla(0, 0%, 100%, 1)',
-  module: 'hsl(231, 14%, 90%)',
-  interactive: 'hsl(229, 13%, 83%)',
-  outline: 'hsl(225, 7%, 78%)',
-  dialog: white,
 
   // text
-  foregroundColor: 'hsl(0, 0%, 0%);',
-  onAccent: white,
-  primary: black,
-  secondary: 'hsl(227, 10%, 37.5%)',
-  hint: 'hsl(224, 9%, 57%)',
-  onInteractive: black,
+  foregroundColor: 'hsl(0,0%,0%)', // hsl(0,0%,0%,0.75)'
+  activeColor: 'hsla(12,97%,65%,1)',
+  buttonTextColor: 'hsla(0,0%,100%,1)',
+  highlightColor: 'hsla(0, 0%, 50%, 0.08)',
 
   // state
   ...stateColors,
+
+  // extra colors
+  foregroundColor2: 'hsla(0, 0%, 0%, 0.05)',
+  buttonTextColor2: 'hsla(0, 0%, 100%, 0.2)',
 
   currentColor: 'currentColor',
 };
 
 export const darkTheme: Colors = {
   // surface
-  accent: brandDark,
-  container: 'hsl(220, 10.7%, 11%)',
-  module: 'hsl(222, 10.2%, 19.2%)',
-  interactive: 'hsl(224, 10%, 28%)',
-  outline: 'hsl(227, 10%, 37.5%)',
-  dialog: black,
+  backgroundColor: '#E7E7E7', // 'hsla(0, 0%, 100%, 1)',
 
   // text
-  onAccent: white,
-  primary: white,
-  secondary: 'hsl(224, 8.7%, 57.1%)',
-  hint: 'hsl(225, 10%, 47.1%)',
-  onInteractive: white,
+  foregroundColor: 'hsl(0,0%,0%)', // hsl(0,0%,0%,0.75)'
+  activeColor: 'hsla(12,97%,65%,1)',
+  buttonTextColor: 'hsla(0,0%,100%,1)',
+  highlightColor: 'hsla(0, 0%, 50%, 0.08)',
 
   // state
   ...stateColors,
@@ -71,22 +55,19 @@ export const darkTheme: Colors = {
 };
 
 export const defaultTheme = {
-  borderRadius: 1,
+  borderRadius: 8,
+  borderColor: 'rgba (0, 0, 0, 0.5)',
   fontFamily: {
     font: '"Inter", sans-serif',
     variable: '"InterVariable", sans-serif',
   },
   fontFamilyCode: 'IBM Plex Mono',
-  tokenColorExtraction: false,
   ...lightTheme,
 };
 
 export function useSystemTheme() {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  const [systemTheme, setSystemTheme] = useState(prefersDark.matches ? darkTheme : lightTheme);
-  prefersDark.addEventListener('change', (e) => {
-    setSystemTheme(e.matches ? darkTheme : lightTheme);
-  });
+  const [systemTheme, setSystemTheme] = useState(lightTheme);
+  // const [systemTheme, setSystemTheme] = useState(darkTheme);
   return systemTheme;
 }
 
@@ -98,19 +79,15 @@ interface ThemeProviderProps {
 }
 
 function toComputedTheme(theme: Required<Theme>): ComputedTheme {
+  console.log('>>> theme.borderRadius: ', theme.borderRadius as number);
   return {
     ...theme,
-    borderRadius: clamp(
-      Number.isFinite(theme.borderRadius)
-        ? (theme.borderRadius as number)
-        : theme.borderRadius
-        ? 1
-        : 0,
-    ),
+    borderRadius: Number(theme.borderRadius),
+    // borderRadius: clamp(Number.isFinite(theme.borderRadius) ? (theme.borderRadius as number) : 0),
     onHover: (color: string) =>
-      color === theme.primary
-        ? transparentize(0.4, theme.primary)
-        : mix(0.16, theme.primary, color),
+      color === theme.activeColor
+        ? transparentize(0.4, theme.activeColor)
+        : mix(0.16, theme.activeColor, color),
   };
 
   function clamp(value: number) {
@@ -127,6 +104,8 @@ export function ThemeProvider({ theme, children }: ThemeProviderProps) {
       ...theme,
     } as Required<Theme>);
   }, [contextTheme, theme]);
+
+  console.log('>> value: ', value);
 
   return (
     <ThemeContext.Provider value={value}>

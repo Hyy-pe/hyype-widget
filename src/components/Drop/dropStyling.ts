@@ -71,9 +71,9 @@ const slideDownCenter = keyframes`
 `;
 
 export const OptionsWrapper = styled.div`
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.backgroundColor};
   border-radius: 9px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
   display: none;
   min-width: calc(100% + 33px);
   padding: 5px 0;
@@ -181,16 +181,6 @@ export const OptionsWrapper = styled.div`
         border-bottom: 8px solid white;
         left: ${props.align === 'right' ? `calc(100% - 11px)` : '50%'};
         top: -8px;
-
-        ${(props) =>
-          props.theme.device.tablet &&
-          css`
-            @media ${props.theme.device.tablet} {
-              transform: unset;
-              left: unset;
-              right: 8px;
-            }
-          `}
       `}
 
     ${(props: DropProps) =>
@@ -201,16 +191,6 @@ export const OptionsWrapper = styled.div`
         border-top: 8px solid white;
         bottom: -8px;
         left: ${props.align === 'right' ? `calc(100% - 11px)` : '50%'};
-
-        ${(props) =>
-          props.theme.device.tablet &&
-          css`
-            @media ${props.theme.device.tablet} {
-              transform: unset;
-              left: unset;
-              right: 8px;
-            }
-          `}
       `}
 ${(props: DropProps) =>
       props.arrowType === 'right' &&
@@ -221,13 +201,6 @@ ${(props: DropProps) =>
         right: -8px;
         top: 50%;
         transform: translateY(-50%);
-
-        ${(props) =>
-          props.theme.device.tablet &&
-          css`
-            @media ${props.theme.device.tablet} {
-            }
-          `}
       `}
   }
 `;
