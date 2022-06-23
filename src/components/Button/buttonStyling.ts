@@ -6,7 +6,7 @@ interface ButtonProps {
 
 const BaseBtnStyles = css`
   border: none;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius}px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -22,8 +22,8 @@ export const BtnWrap = styled.div`
 export const PrimaryBtn = styled.button`
   ${BaseBtnStyles}
 
-  background-color: hsla(12, 97%, 65%, 1);
-  color: hsla(0, 0%, 100%, 1);
+  background-color: ${({ theme }) => theme.activeColor};
+  color: ${({ theme }) => theme.buttonTextColor};
 
   ${(props: ButtonProps) =>
     props.disabled &&

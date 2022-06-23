@@ -6,7 +6,7 @@ export const PoweredFooterWrap = styled.div`
   justify-content: center;
   padding: 12px 0 12px 0;
   font-size: 12px;
-  color: hsla(0, 0%, 0%, 0.75);
-  background-color: hsla(0, 0%, 0%, 0.05);
+  color: ${({ theme }) => theme.foregroundColor4};
+  background-color: ${({ theme }) => theme.foregroundColor2};
   opacity: 0.75;
 `;

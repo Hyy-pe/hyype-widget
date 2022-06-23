@@ -84,7 +84,6 @@ export default function Widget(props: WidgetProps) {
 
   // checkRequiredFields();
 
-  console.log('>>> web3Provider: ', web3Provider?.selectedAddress);
   const isWidgetDisabled = !web3Provider?.selectedAddress || !contractAddress || !tokenId;
 
   // if (!web3Provider) {
@@ -118,8 +117,6 @@ export default function Widget(props: WidgetProps) {
       </ThemeProvider>
     );
   }
-
-  console.log('>>> isWidgetDisabled: ', isWidgetDisabled);
 
   return (
     <ThemeProvider theme={theme}>

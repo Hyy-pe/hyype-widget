@@ -10,11 +10,11 @@ export const WidgetWrapper = styled.div<{ width?: string | number }>`
   
   width: ${({ width }) => width && (isNaN(Number(width)) ? width : `${width}px`)};
   min-width: 320px;
-  background-color: ${({ theme }) => theme.container};
+  background-color: ${({ theme }) => theme.backgroundColor};
   border: 1px solid rgba(0, 0, 0, 0.75);
-  border-radius: ${({ theme }) => theme.borderRadius}px;
+  border-radius: ${({ theme }) => theme.borderRadius}pxpx;
   box-sizing: border-box;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.foregroundColor};
   -moz-osx-font-smoothing: grayscale;
 
   * {
@@ -42,9 +42,11 @@ export const WidgetDisabledInfo = styled.p`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   position: absolute;
+  padding: 0 8px;
+  width: 100%;
   top: 40%;
-  left: 8%;
   z-index: 1;
 
   p:not(:first-child) {
