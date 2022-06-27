@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   flex-basis: 100%;
   min-height: 460px;
+  height: 100%;
 `;
 
 export const MsgBody = styled.div`
