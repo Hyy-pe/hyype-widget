@@ -26,13 +26,22 @@ export type WidgetProps = {
   contractAddress?: string;
   tokenId?: string;
   clientId?: string;
+  env?: string;
   width?: string | number;
   theme?: Theme;
   className?: string;
 };
 
 export default function Widget(props: WidgetProps) {
-  const { web3Provider, contractAddress = '', tokenId = '', clientId, theme, className } = props;
+  const {
+    web3Provider,
+    contractAddress = '',
+    tokenId = '',
+    clientId,
+    env,
+    theme,
+    className,
+  } = props;
   const [showEditor, setShowEditor] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [nft, setNft] = useState<any | null>(null);
@@ -54,7 +63,7 @@ export default function Widget(props: WidgetProps) {
       const getNftDetails = async () => {
         try {
           setIsLoading(true);
-          const nft = await fetchNftDetails({ contractAddress, tokenId });
+          const nft = await fetchNftDetails({ env, contractAddress, tokenId });
 
           setNft(nft);
           setIsLoading(false);
@@ -67,7 +76,7 @@ export default function Widget(props: WidgetProps) {
     } catch (error) {
       console.log('err getNftDetails: ', error);
     }
-  }, [contractAddress, tokenId, web3Provider]);
+  }, [contractAddress, tokenId, web3Provider, env]);
 
   // const checkRequiredFields = () => {
   //   console.log(
@@ -137,6 +146,7 @@ export default function Widget(props: WidgetProps) {
               nft={nft}
               tokenId={tokenId}
               web3Provider={web3Provider}
+              env={env}
             />
           ) : (
             <Button onClick={() => setShowEditor(true)}>Post Lore</Button>

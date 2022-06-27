@@ -1,15 +1,15 @@
-import { BASE_API_URL } from 'constants/api';
-
-const URL_TOKEN = `${BASE_API_URL}/api/v1/token`;
+import { getBaseApiUrl } from 'utils';
 
 export const fetchNftDetails = async ({
   contractAddress,
   tokenId,
+  env,
 }: {
   contractAddress: any;
   tokenId: string;
+  env: string;
 }) => {
-  const url = `${URL_TOKEN}/${contractAddress}/${tokenId}?refresh=false`;
+  const url = `${getBaseApiUrl(env)}/api/v1/token/${contractAddress}/${tokenId}?refresh=false`;
 
   try {
     let nft = await fetch(url);

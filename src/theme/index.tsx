@@ -78,7 +78,6 @@ interface ThemeProviderProps {
 }
 
 function toComputedTheme(theme: Required<Theme>): ComputedTheme {
-  console.log('>>> theme.borderRadius: ', theme.borderRadius as number);
   return {
     ...theme,
     borderRadius: Number(theme.borderRadius),
@@ -103,8 +102,6 @@ export function ThemeProvider({ theme, children }: ThemeProviderProps) {
       ...theme,
     } as Required<Theme>);
   }, [contextTheme, theme]);
-
-  console.log('>> value: ', value);
 
   return (
     <ThemeContext.Provider value={value}>

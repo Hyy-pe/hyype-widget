@@ -9,17 +9,10 @@ interface LoreDropdownProps {
   contractAddress: string;
   setLoreType: any;
   loreType: any;
-  slug: string;
-  selectedNft?: any;
+  env: string;
 }
 
-const Dropdown: FC<LoreDropdownProps> = ({
-  contractAddress = '',
-  setLoreType,
-  loreType,
-  slug,
-  selectedNft,
-}) => {
+const Dropdown: FC<LoreDropdownProps> = ({ contractAddress = '', setLoreType, loreType, env }) => {
   const nft = ''; // router.query?.nft || selectedNft || '';
   const [dropdown, setDropdown] = useState(false);
   const [loreTags, setLoreTags] = useState<any | ['']>(['']);
@@ -41,6 +34,7 @@ const Dropdown: FC<LoreDropdownProps> = ({
       const getLoreTags = async () => {
         const loreTags = await fetchCommunityLoreTags({
           contractAddress,
+          env,
         });
 
         setLoreTags(loreTags);
@@ -52,7 +46,7 @@ const Dropdown: FC<LoreDropdownProps> = ({
     }
 
     setIsLoading(false);
-  }, [slug]);
+  }, [contractAddress]);
 
   if (isLoading) {
     return (

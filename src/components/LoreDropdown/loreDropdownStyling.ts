@@ -51,10 +51,7 @@ export const LoreTypeButton = styled.button`
   align-items: center;
   background: ${({ theme }) => theme.backgroundColor};
   border: 1px solid ${({ theme }) => theme.foregroundColor};
-  border-radius: ${({ theme }) => {
-    console.log('theme: ', theme);
-    return theme.borderRadius;
-  }}px;
+  border-radius: ${({ theme }) => theme.borderRadius}px;
   cursor: pointer;
   height: 36px;
   padding: 0 16px;

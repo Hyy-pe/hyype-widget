@@ -1,14 +1,21 @@
-import { BASE_API_URL, SANDBOX_API_URL } from 'constants/api';
-const CLIENT_ID = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
+import { getBaseApiUrl } from 'utils';
 
-const URL_LORE = `${BASE_API_URL}/api/v1/lore`;
+const CLIENT_ID = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
 
 const headers = {
   'Content-Type': 'application/json',
 };
 
-export const getNonce = async ({ address, action }: { address: any; action: string }) => {
-  const url = `${BASE_API_URL}/api/v1/user/public/request-nonce`;
+export const getNonce = async ({
+  address,
+  action,
+  env,
+}: {
+  address: any;
+  action: string;
+  env: string;
+}) => {
+  const url = `${getBaseApiUrl(env)}/api/v1/user/public/request-nonce`;
   const payload = {
     address,
     action,
@@ -41,7 +48,7 @@ export const getImgSign = async ({
   fileWidth: any;
   fileHeight: any;
 }) => {
-  const url = `${BASE_API_URL}/api/v1/public/lore/image/signed-upload-request`;
+  const url = `${getBaseApiUrl(env)}/api/v1/public/lore/image/signed-upload-request`;
   const payload = {
     fileType,
     fileWidth,
@@ -49,7 +56,7 @@ export const getImgSign = async ({
   };
 
   try {
-    let resp: any = await fetch(url, {
+    const resp: any = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,9 +71,9 @@ export const getImgSign = async ({
   }
 };
 
-export const postLore = async ({ payload }: { payload: any }) => {
+export const postLore = async ({ payload, env }: { payload: any; env: string }) => {
   try {
-    const url = `${URL_LORE}/create-lore`;
+    const url = `${getBaseApiUrl(env)}/api/v1/lore/create-lore`;
 
     const resp = await fetch(url, {
       method: 'POST',

@@ -1,7 +1,7 @@
 import { useValue } from 'react-cosmos/fixture';
-import { HyypeWidget, defaultTheme } from './../index';
 
-import useJsonRpcEndpoint from './useJsonRpcEndpoint';
+import { defaultTheme, HyypeWidget } from './../index';
+import useEnv from './useEnv';
 import useWeb3Provider from './useWeb3Provider';
 
 function Fixture() {
@@ -15,6 +15,7 @@ function Fixture() {
   const [clientId] = useValue('clientId', {
     defaultValue: 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad',
   });
+  const env = useEnv();
   const [width] = useValue('width', { defaultValue: '720' });
 
   return (
@@ -23,6 +24,7 @@ function Fixture() {
       contractAddress={contractAddress}
       tokenId={tokenId}
       clientId={clientId}
+      env={env}
       theme={theme}
       width={width}
     />
