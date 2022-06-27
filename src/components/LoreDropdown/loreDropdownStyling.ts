@@ -59,7 +59,7 @@ export const LoreTypeButton = styled.button`
   height: 36px;
   padding: 0 16px;
   transition: all 0.4s;
-  box-shadow: 0px 2px 4px ${({ theme }) => theme.foregroundColor3};
+  box-shadow: 0px 2px 4px ${({ theme }) => theme.foregroundColor2};
 
   &:hover {
     background: radial-gradient(circle, transparent 1%, rgb(255 255 255) 1%) center center / 15000%

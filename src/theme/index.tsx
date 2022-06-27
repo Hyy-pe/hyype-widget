@@ -20,25 +20,22 @@ const stateColors = {
 
 export const lightTheme: Colors = {
   // surface
-  backgroundColor: 'hsla(0, 0%, 100%, 1)',
+  backgroundColor: 'rgba(255, 255, 255, 1)', // white
 
   // text
-  foregroundColor: 'hsla(0,0%,0%,1)', // hsl(0,0%,0%,0.75)'
-  activeColor: 'hsla(12,97%,65%,1)',
-  buttonTextColor: 'hsla(0,0%,100%,1)',
-  highlightColor: 'hsla(0, 0%, 50%, 0.08)',
+  foregroundColor: 'rgba(0, 0, 0, 1)', // black - font color, border
+  activeColor: 'rgba(252, 113, 79, 1)', // orange
+  buttonTextColor: 'rgba(255, 255, 255, 1)', // white
+  highlightColor: 'rgba(127, 127, 127, 0.08)', // gray
 
   // state
-  ...stateColors,
+  // ...stateColors,
 
   // extra colors
-  foregroundColor2: 'hsla(0, 0%, 0%, 0.05)',
-  foregroundColor3: 'hsla(0, 0%, 0%, 0.02)',
-  foregroundColor4: 'hsla(0, 0%, 0%, 0.75)',
+  secondaryColor: 'rgba(0, 0, 0, 0.75)',
+  foregroundColor2: 'hsla(0, 0%, 0%, 0.05)', // shimmer loader
   buttonTextColor2: 'hsla(0, 0%, 100%, 0.2)',
   highlightColor2: 'hsla(0, 0%, 84%, 1)',
-
-  currentColor: 'currentColor',
 };
 
 // dark theme
@@ -54,18 +51,16 @@ export const darkTheme: Colors = {
 
   // state
   ...stateColors,
-
-  currentColor: 'currentColor',
 };
 
 export const defaultTheme = {
   borderRadius: 8,
-  borderColor: 'rgba (0, 0, 0, 0.5)',
+  borderColor: 'rgba(0, 0, 0, 0.75)',
   fontFamily: {
     font: '"Inter", sans-serif',
     variable: '"InterVariable", sans-serif',
   },
-  fontFamilyCode: 'IBM Plex Mono',
+  // fontFamilyCode: 'IBM Plex Mono',
   ...lightTheme,
 };
 

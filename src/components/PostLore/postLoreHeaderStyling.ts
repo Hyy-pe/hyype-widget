@@ -23,7 +23,7 @@ export const HeaderText = styled.div`
 `;
 
 export const HeaderInfo = styled.div`
-  color: ${({ theme }) => theme.foregroundColor};
+  color: ${({ theme }) => theme.secondaryColor};
   font-size: 12px;
   font-weight: 400;
   margin-bottom: 12px;
@@ -50,7 +50,7 @@ export const ImgLoader = styled.div`
   height: 64px;
   position: relative;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.buttonTextColor};
+  // border: 1px solid ${({ theme }) => theme.buttonTextColor};
   border-radius: ${({ theme }) => theme.borderRadius}px;
   background: ${({ theme }) => theme.foregroundColor2};
   z-index: 2;

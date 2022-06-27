@@ -9,19 +9,16 @@ export interface Colors {
   highlightColor: string;
 
   // state
-  active: string;
-  success: string;
-  warning: string;
-  error: string;
+  // active: string;
+  // success: string;
+  // warning: string;
+  // error: string;
 
   // extra colors
+  secondaryColor: string;
   foregroundColor2: string;
   buttonTextColor2: string;
-  foregroundColor3: string;
-  foregroundColor4: string;
   highlightColor2: string;
-
-  currentColor: 'currentColor';
 }
 
 export type Color = keyof Colors;
@@ -35,7 +32,7 @@ export interface Attributes {
         font: string;
         variable: string;
       };
-  fontFamilyCode: string;
+  // fontFamilyCode: string;
 }
 
 export interface Theme extends Partial<Attributes>, Partial<Colors> {}
