@@ -38,7 +38,7 @@ export default function Widget(props: WidgetProps) {
     contractAddress = '',
     tokenId = '',
     clientId,
-    env,
+    env = '',
     theme,
     className,
   } = props;
