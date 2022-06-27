@@ -17,25 +17,21 @@ import {
   Wrapper,
 } from './postLoreContainerStyling';
 
-interface AddLoreContentProps {
+interface PostLoreContentProps {
   contractAddress: string;
   nft?: any;
   tokenId?: string;
   web3Provider: any;
-
-  selectedNft?: any;
-  setEditor?: any;
-  editor?: any;
+  env: string;
   loreContent?: any;
 }
 
-const AddLoreContent: FC<AddLoreContentProps> = ({
+const PostLoreContent: FC<PostLoreContentProps> = ({
   contractAddress = '',
   nft = {},
   tokenId,
   web3Provider,
-
-  selectedNft,
+  env,
   loreContent,
 }) => {
   const [editor, setEditor] = useState<any>(null);
@@ -43,8 +39,6 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   const [btnText, setBtnText] = useState<string>('Post Lore');
   const [isSignRejected, setIsSignRejected] = useState<boolean>(false);
   const [lorePostingStatus, setLorePostingStatus] = useState<string>('');
-
-  const slug = selectedNft?.collectionDetails?.slug || selectedNft?.slug;
 
   // sign the message from wallet popup
   const doSign = async (nonce: any) => {
@@ -80,6 +74,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
       const nonce = await getNonce({
         address: walletAddress,
         action: 'CREATE_LORE',
+        env,
       });
 
       if (!nonce) {
@@ -112,7 +107,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
         },
       };
 
-      const postLoreResp = await postLore({ payload });
+      const postLoreResp = await postLore({ payload, env });
 
       if (postLoreResp?.loreId) {
         setLorePostingStatus('success');
@@ -146,8 +141,7 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
                 contractAddress={contractAddress}
                 setLoreType={setLoreType}
                 loreType={loreType}
-                slug={slug}
-                selectedNft={selectedNft}
+                env={env}
               />
             </LoreDropdownWrap>
 
@@ -183,4 +177,4 @@ const AddLoreContent: FC<AddLoreContentProps> = ({
   );
 };
 
-export default AddLoreContent;
+export default PostLoreContent;

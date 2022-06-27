@@ -1,9 +1,13 @@
-import { BASE_API_URL } from 'constants/api';
+import { getBaseApiUrl } from 'utils';
 
-const URL_COMMUNITY = `${BASE_API_URL}/api/v1/community`;
-
-export const fetchCommunityLoreTags = async ({ contractAddress }: { contractAddress: any }) => {
-  const url = `${URL_COMMUNITY}/lore-tags?searchKey=${contractAddress}`;
+export const fetchCommunityLoreTags = async ({
+  contractAddress,
+  env,
+}: {
+  contractAddress: any;
+  env: string;
+}) => {
+  const url = `${getBaseApiUrl(env)}/api/v1/community/lore-tags?searchKey=${contractAddress}`;
 
   try {
     let nft = await fetch(url);
