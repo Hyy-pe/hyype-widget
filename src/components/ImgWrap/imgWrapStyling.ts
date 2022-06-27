@@ -3,7 +3,6 @@ import { ImgWrapProps } from './index';
 
 export const ImgContainer = styled.div`
   align-items: stretch;
-  // background-color: #d8d8d8;
   background-color: ${({ theme }) => theme.highlightColor};
   border-radius: ${({ theme }) => theme.borderRadius}px;
   cursor: pointer;

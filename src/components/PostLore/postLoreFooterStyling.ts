@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const FooterWrap = styled.div`
   align-items: center;
-  border-top: 1px solid ${({ theme }) => theme.foregroundColor4};
+  border-top: 1px solid ${({ theme }) => theme.secondaryColor};
   display: flex;
   flex-direction: row;
   justify-content: space-between;

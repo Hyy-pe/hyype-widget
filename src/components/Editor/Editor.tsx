@@ -80,7 +80,7 @@ const Editor = ({ setEditor, children, data, options }: any) => {
         .container {
           width: 100%;
           padding: 0;
-          min-height: 600px;
+          min-height: 400px;
         }
       `}</style>
     </React.Fragment>
