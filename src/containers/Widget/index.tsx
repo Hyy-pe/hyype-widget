@@ -28,9 +28,14 @@ export type WidgetProps = {
   clientId?: string;
   platformSpecificSigningMessage: string;
   env?: string;
-  width?: string | number;
   theme?: Theme;
+  width?: string | number;
   className?: string;
+  tokenName?: string;
+  tokenThumbnail?: string;
+  header?: string;
+  subHeader?: string;
+  callToAction?: string;
 };
 
 export const globalOb = {
@@ -47,6 +52,11 @@ export default function Widget(props: WidgetProps) {
     env = '',
     theme,
     className,
+    tokenName,
+    tokenThumbnail,
+    header,
+    subHeader,
+    callToAction,
   } = props;
   const [showEditor, setShowEditor] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -85,7 +95,7 @@ export default function Widget(props: WidgetProps) {
     } catch (error) {
       console.log('err getNftDetails: ', error);
     }
-  }, [contractAddress, tokenId, web3Provider, env]);
+  }, [contractAddress, tokenId, web3Provider, env, tokenThumbnail]);
 
   // checkRequiredFields();
 
@@ -150,6 +160,11 @@ export default function Widget(props: WidgetProps) {
               clientId={clientId}
               platformSpecificSigningMessage={platformSpecificSigningMessage}
               env={env}
+              tokenName={tokenName}
+              tokenThumbnail={tokenThumbnail}
+              header={header}
+              subHeader={subHeader}
+              callToAction={callToAction}
             />
           ) : (
             <Button onClick={() => setShowEditor(true)}>Post Lore</Button>

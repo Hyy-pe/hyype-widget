@@ -8,6 +8,7 @@ function Fixture() {
   // const jsonRpcEndpoint = useJsonRpcEndpoint();
   const web3Provider = useWeb3Provider();
   const [theme, setTheme] = useValue('theme', { defaultValue: { ...defaultTheme } });
+
   const [contractAddress] = useValue('contractAddress', {
     defaultValue: '',
   });
@@ -18,8 +19,16 @@ function Fixture() {
   const [platformSpecificSigningMessage] = useValue('platformSpecificSigningMessage', {
     defaultValue: '',
   });
+
   const env = useEnv();
+
+  // optional props
   const [width] = useValue('width', { defaultValue: '720' });
+  const [tokenName] = useValue('tokenName', { defaultValue: '' });
+  const [tokenThumbnail] = useValue('tokenThumbnail', { defaultValue: '' });
+  const [header] = useValue('header', { defaultValue: '' });
+  const [subHeader] = useValue('subHeader', { defaultValue: '' });
+  const [callToAction] = useValue('callToAction', { defaultValue: '' });
 
   return (
     <HyypeWidget
@@ -31,6 +40,11 @@ function Fixture() {
       env={env}
       theme={theme}
       width={width}
+      tokenName={tokenName}
+      tokenThumbnail={tokenThumbnail}
+      header={header}
+      subHeader={subHeader}
+      callToAction={callToAction}
     />
   );
 }
