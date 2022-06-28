@@ -26,10 +26,15 @@ export type WidgetProps = {
   contractAddress?: string;
   tokenId?: string;
   clientId?: string;
+  platformSpecificSigningMessage: string;
   env?: string;
   width?: string | number;
   theme?: Theme;
   className?: string;
+};
+
+export const globalOb = {
+  env: '',
 };
 
 export default function Widget(props: WidgetProps) {
@@ -38,6 +43,7 @@ export default function Widget(props: WidgetProps) {
     contractAddress = '',
     tokenId = '',
     clientId,
+    platformSpecificSigningMessage,
     env = '',
     theme,
     className,
@@ -72,28 +78,23 @@ export default function Widget(props: WidgetProps) {
         }
       };
 
+      // update the env to change the api domain
+      if (globalOb.env !== env) globalOb.env = env;
+
       getNftDetails();
     } catch (error) {
       console.log('err getNftDetails: ', error);
     }
   }, [contractAddress, tokenId, web3Provider, env]);
 
-  // const checkRequiredFields = () => {
-  //   console.log(
-  //     ' >> web3Provider',
-  //     web3Provider,
-  //     ' >> contractAddress: ',
-  //     contractAddress,
-  //     '> tokenId: ',
-  //     tokenId,
-  //     ' > clientId: ',
-  //     clientId,
-  //   );
-  // };
-
   // checkRequiredFields();
 
-  const isWidgetDisabled = !web3Provider?.selectedAddress || !contractAddress || !tokenId;
+  const isWidgetDisabled =
+    !web3Provider?.selectedAddress ||
+    !contractAddress ||
+    !tokenId ||
+    !env ||
+    !platformSpecificSigningMessage;
 
   // if (!web3Provider) {
   //   return <h3>Select web3Provider from right side dropdown option!</h3>;
@@ -146,6 +147,8 @@ export default function Widget(props: WidgetProps) {
               nft={nft}
               tokenId={tokenId}
               web3Provider={web3Provider}
+              clientId={clientId}
+              platformSpecificSigningMessage={platformSpecificSigningMessage}
               env={env}
             />
           ) : (

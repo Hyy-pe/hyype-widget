@@ -11,6 +11,7 @@ import Quote from '@editorjs/quote';
 import { getImgSign } from 'api/lore';
 // @ts-ignore
 import SimpleVideo from 'simple-video-editorjs';
+import { globalOb } from 'containers/Widget';
 
 const dataURItoBlob = (dataURI: any, fileType: string) => {
   try {
@@ -127,6 +128,7 @@ export const tools = {
               fileType: imageToUpload.type,
               fileWidth: width,
               fileHeight: height,
+              env: globalOb?.env,
             });
 
             if (!imgSign.valid) {
@@ -152,6 +154,7 @@ export const tools = {
               fileType: imageToUpload.type,
               fileWidth: width,
               fileHeight: height,
+              env: globalOb?.env,
             });
 
             if (!imgSign.valid) {

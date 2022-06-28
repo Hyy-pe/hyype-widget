@@ -15,7 +15,7 @@ interface LoreDropdownProps {
 const Dropdown: FC<LoreDropdownProps> = ({ contractAddress = '', setLoreType, loreType, env }) => {
   const nft = ''; // router.query?.nft || selectedNft || '';
   const [dropdown, setDropdown] = useState(false);
-  const [loreTags, setLoreTags] = useState<any | ['']>(['']);
+  const [loreTags, setLoreTags] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const DefaultDropdownOptions = [
@@ -28,6 +28,8 @@ const Dropdown: FC<LoreDropdownProps> = ({ contractAddress = '', setLoreType, lo
   ];
 
   useEffect(() => {
+    if (!contractAddress) return;
+
     try {
       setIsLoading(true);
 
@@ -74,7 +76,7 @@ const Dropdown: FC<LoreDropdownProps> = ({ contractAddress = '', setLoreType, lo
       </LoreTypeButton>
 
       <Drop show={dropdown} left="50px" onClose={() => setDropdown(false)} align="right">
-        {loreTags.map((tag, index) => {
+        {loreTags?.map((tag, index) => {
           return (
             <Option
               key={`dropdown_${index}`}

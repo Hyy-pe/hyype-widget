@@ -9,10 +9,12 @@ const headers = {
 export const getNonce = async ({
   address,
   action,
+  clientId,
   env,
 }: {
   address: any;
   action: string;
+  clientId: string;
   env: string;
 }) => {
   const url = `${getBaseApiUrl(env)}/api/v1/user/public/request-nonce`;
@@ -26,7 +28,7 @@ export const getNonce = async ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'client-id': CLIENT_ID,
+        'client-id': clientId,
       },
       body: JSON.stringify(payload),
       // body: JSON.stringify(payload),
@@ -43,10 +45,12 @@ export const getImgSign = async ({
   fileType,
   fileWidth,
   fileHeight,
+  env,
 }: {
   fileType: any;
   fileWidth: any;
   fileHeight: any;
+  env: string;
 }) => {
   const url = `${getBaseApiUrl(env)}/api/v1/public/lore/image/signed-upload-request`;
   const payload = {
