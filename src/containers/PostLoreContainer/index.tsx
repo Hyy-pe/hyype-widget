@@ -22,6 +22,8 @@ interface PostLoreContentProps {
   nft?: any;
   tokenId?: string;
   web3Provider: any;
+  clientId: string;
+  platformSpecificSigningMessage?: string;
   env: string;
   loreContent?: any;
 }
@@ -31,6 +33,8 @@ const PostLoreContent: FC<PostLoreContentProps> = ({
   nft = {},
   tokenId,
   web3Provider,
+  clientId,
+  platformSpecificSigningMessage,
   env,
   loreContent,
 }) => {
@@ -43,7 +47,7 @@ const PostLoreContent: FC<PostLoreContentProps> = ({
   // sign the message from wallet popup
   const doSign = async (nonce: any) => {
     try {
-      let nonceMsg = `Post a lore on Hyype by verifying your wallet address. One time code : ${nonce}`;
+      let nonceMsg = `${platformSpecificSigningMessage}${nonce}`;
       nonceMsg = Buffer.from(nonceMsg).toString('hex');
 
       const from = web3Provider.selectedAddress; // wallet
@@ -74,6 +78,7 @@ const PostLoreContent: FC<PostLoreContentProps> = ({
       const nonce = await getNonce({
         address: walletAddress,
         action: 'CREATE_LORE',
+        clientId,
         env,
       });
 
