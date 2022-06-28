@@ -9,4 +9,10 @@ export const PoweredFooterWrap = styled.div`
   color: ${({ theme }) => theme.secondaryColor};
   background-color: ${({ theme }) => theme.foregroundColor2};
   opacity: 0.75;
+
+  a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
 `;

@@ -1,5 +1,11 @@
 import { PoweredFooterWrap } from './poweredFooterStyling';
 
 export default function PoweredFooter() {
-  return <PoweredFooterWrap>Powered By Hyy.pe</PoweredFooterWrap>;
+  return (
+    <PoweredFooterWrap>
+      <a href="https://hyy.pe" target="_blank">
+        Powered By Hyy.pe
+      </a>
+    </PoweredFooterWrap>
+  );
 }
