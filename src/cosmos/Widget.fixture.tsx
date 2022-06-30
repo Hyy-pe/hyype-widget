@@ -5,20 +5,38 @@ import useEnv from './useEnv';
 import useWeb3Provider from './useWeb3Provider';
 
 function Fixture() {
-  // const jsonRpcEndpoint = useJsonRpcEndpoint();
   const web3Provider = useWeb3Provider();
   const [theme, setTheme] = useValue('theme', { defaultValue: { ...defaultTheme } });
 
+  // const [contractAddress] = useValue('contractAddress', {
+  //   defaultValue: '',
+  // });
+  // const [tokenId] = useValue('tokenId', { defaultValue: '' });
+  // const [clientId] = useValue('clientId', {
+  //   defaultValue: '',
+  // });
+  // const [platformSpecificSigningMessage] = useValue('platformSpecificSigningMessage', {
+  //   defaultValue: '',
+  // });
+
+  /**
+   * set default values to make the developing process faster
+   */
+
   const [contractAddress] = useValue('contractAddress', {
-    defaultValue: '',
+    defaultValue: '0xa76ebc37e23bc7f20d62156ad88f2f29bf1e0d3a',
   });
-  const [tokenId] = useValue('tokenId', { defaultValue: '' });
+
+  const [tokenId] = useValue('tokenId', { defaultValue: '233' });
+
   const [clientId] = useValue('clientId', {
-    defaultValue: '',
+    defaultValue: 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad',
   });
-  const [platformSpecificSigningMessage] = useValue('platformSpecificSigningMessage', {
-    defaultValue: '',
-  });
+
+  const platformSpecificSigningMessage =
+    'Post a lore on Hyype by verifying your wallet address. One time code : ';
+
+  // -----------------------------
 
   const env = useEnv();
 

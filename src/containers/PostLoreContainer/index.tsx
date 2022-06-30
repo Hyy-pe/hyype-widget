@@ -1,5 +1,6 @@
 import { getNonce, postLore } from 'api/lore';
 import { Buffer } from 'buffer';
+import DisabledWidget from 'components/DisabledWidget';
 import Editor from 'components/Editor/Editor';
 import LoreDropdown from 'components/LoreDropdown';
 import LorePostedState from 'components/PostLore/LorePostedState';
@@ -17,7 +18,8 @@ import {
   Wrapper,
 } from './postLoreContainerStyling';
 
-interface PostLoreContentProps {
+export interface PostLoreContentProps {
+  mandatoryMissingProps: any;
   contractAddress: string;
   nft?: any;
   tokenId?: string;
@@ -33,21 +35,24 @@ interface PostLoreContentProps {
   callToAction?: string;
 }
 
-const PostLoreContent: FC<PostLoreContentProps> = ({
-  contractAddress = '',
-  nft = {},
-  tokenId,
-  web3Provider,
-  clientId,
-  platformSpecificSigningMessage,
-  env,
-  loreContent,
-  tokenName,
-  tokenThumbnail,
-  header,
-  subHeader,
-  callToAction,
-}) => {
+const PostLoreContent: FC<PostLoreContentProps> = (props) => {
+  const {
+    mandatoryMissingProps = [],
+    contractAddress = '',
+    nft = {},
+    tokenId,
+    web3Provider,
+    clientId,
+    platformSpecificSigningMessage,
+    env,
+    loreContent,
+    tokenName,
+    tokenThumbnail,
+    header,
+    subHeader,
+    callToAction,
+  } = props;
+
   const [editor, setEditor] = useState<any>(null);
   const [loreType, setLoreType] = useState('Collector Statement');
   const [btnText, setBtnText] = useState<string>('Post Lore');
@@ -141,8 +146,20 @@ const PostLoreContent: FC<PostLoreContentProps> = ({
     setBtnText(callToAction || 'Post Lore');
   };
 
+  if (mandatoryMissingProps?.length > 0) {
+    return <DisabledWidget {...props} />;
+  }
+
   if (lorePostingStatus) {
-    return <LorePostedState lorePostingStatus={lorePostingStatus} nft={nft} />;
+    return (
+      <LorePostedState
+        lorePostingStatus={lorePostingStatus}
+        nft={nft}
+        tokenName={tokenName}
+        tokenThumbnail={tokenThumbnail}
+        header={header}
+      />
+    );
   }
 
   const isBtnLoading = ![callToAction, 'Post Lore'].includes(btnText);
@@ -151,7 +168,6 @@ const PostLoreContent: FC<PostLoreContentProps> = ({
     <Wrapper>
       <PostLoreHeader
         nft={nft}
-        title={'token name'}
         tokenName={tokenName}
         tokenThumbnail={tokenThumbnail}
         header={header}
