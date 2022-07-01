@@ -19,7 +19,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-import { Button, PostLoreContainerWrap, WidgetDisabledInfo, WidgetWrapper } from './widgetStyling';
+import { Button, PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
@@ -109,7 +109,6 @@ export default function Widget(props: WidgetProps) {
 
   const mandatoryMissingProps = mandatoryProps.filter((p) => !props[p]);
   if (!web3Provider?.selectedAddress) mandatoryMissingProps.push('web3Provider');
-
 
   if (isLoading) {
     return (

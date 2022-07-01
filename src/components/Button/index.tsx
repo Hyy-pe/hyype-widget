@@ -1,5 +1,4 @@
 import { Spinner } from 'components/PostLore/postLoreHeaderStyling';
-import React from 'react';
 
 import { BtnWrap, LoadingIcon, PrimaryBtn } from './buttonStyling';
 

@@ -1,15 +1,10 @@
-import ImgWrap from 'components/ImgWrap';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { getNftImgSrc } from 'utils';
-
 import {
-  HeaderWrap,
-  HeaderImg,
-  ImgLoader,
-  DescWrapLoader,
-  DescShort,
   DescLong,
+  DescShort,
+  DescWrapLoader,
+  HeaderImg,
+  HeaderWrap,
+  ImgLoader,
 } from './postLoreHeaderStyling';
 
 export default function PostLoreHeaderLoader() {

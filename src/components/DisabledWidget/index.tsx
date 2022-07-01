@@ -9,9 +9,9 @@ import { LoreDropdownWrap } from 'containers/PostLoreContainer/postLoreContainer
 
 import {
   DisabledDropdownWrap,
-  MsgListsHeader,
   MsgInfoLists,
   MsgListItem,
+  MsgListsHeader,
 } from './disabledWidgetStyling';
 
 const DISABLED_LORE_POST_TITLE = 'Unable to find the token';
