@@ -1,10 +1,9 @@
 {
   "name": "@hyype/widget",
-  "version": "0.1.0",
-  "description": "Hyype Widget",
-  "homepage": "https://github.com/Hyy-pe/hyype-widget#readme",
-  "repository": "https://github.com/Hyy-pe/hyype-widget",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Hyype Lore Widget",
+  "main": "src/index.tsx",
+  "private": false,
   "scripts": {
     "cosmos": "cosmos",
     "cosmos:export": "cosmos-export",
@@ -54,7 +53,6 @@
     "@web3-react/types": "^8.0.12-beta.0",
     "buffer": "^6.0.3",
     "ethers": "^5.6.8",
-    "js-cookie": "^3.0.1",
     "polished": "^4.2.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
