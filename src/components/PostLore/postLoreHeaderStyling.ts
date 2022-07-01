@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
 import { SpinnerIcon } from 'components/Icons';
+import styled, { keyframes } from 'styled-components';
 
 type SpinnerColor = {
   color?: string;

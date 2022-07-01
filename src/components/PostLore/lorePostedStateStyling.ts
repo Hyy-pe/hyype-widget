@@ -17,7 +17,7 @@ export const MsgBody = styled.div`
 `;
 
 export const MsgTitle = styled.h1`
-  margin: 32px 0 16px 0;
+  margin: 24px 0 16px 0;
   font-size: 20px;
   color: ${({ theme }) => theme.foregroundColor};
   font-weight: 500;

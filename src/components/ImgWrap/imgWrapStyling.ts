@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import { ImgWrapProps } from './index';
 
 export const ImgContainer = styled.div`

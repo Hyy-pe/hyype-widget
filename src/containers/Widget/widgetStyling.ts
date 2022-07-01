@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const WidgetWrapper = styled.div<{ width?: string | number }>`
   display: flex;
@@ -30,12 +30,6 @@ export const WidgetWrapper = styled.div<{ width?: string | number }>`
 
 export const PostLoreContainerWrap = styled.div`
   width: 100%;
-  ${(props: { isWidgetDisabled: boolean }) =>
-    props.isWidgetDisabled &&
-    css`
-      opacity: 0.5;
-      pointer-events: none;
-    `}
 `;
 
 export const WidgetDisabledInfo = styled.p`

@@ -19,7 +19,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-import { Button, PostLoreContainerWrap, WidgetDisabledInfo, WidgetWrapper } from './widgetStyling';
+import { Button, PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
@@ -99,18 +99,16 @@ export default function Widget(props: WidgetProps) {
 
   // checkRequiredFields();
 
-  const isWidgetDisabled =
-    !web3Provider?.selectedAddress ||
-    !contractAddress ||
-    !tokenId ||
-    !env ||
-    !platformSpecificSigningMessage;
+  const mandatoryProps = [
+    'clientId',
+    'contractAddress',
+    'tokenId',
+    'env',
+    'platformSpecificSigningMessage',
+  ];
 
-  // if (!web3Provider) {
-  //   return <h3>Select web3Provider from right side dropdown option!</h3>;
-  // } else if (web3Provider && !web3Provider?.selectedAddress) {
-  //   return <h3>Wallet is connecting!</h3>;
-  // }
+  const mandatoryMissingProps = mandatoryProps.filter((p) => !props[p]);
+  if (!web3Provider?.selectedAddress) mandatoryMissingProps.push('web3Provider');
 
   if (isLoading) {
     return (
@@ -143,16 +141,10 @@ export default function Widget(props: WidgetProps) {
       <WidgetWrapper width={width}>
         {/* {checkRequiredFields()} */}
 
-        {isWidgetDisabled && (
-          <WidgetDisabledInfo>
-            <p>Provide the web3Provider, contractAddress, tokenId from right side!</p>
-            <p>Make sure the wallet is connected and you own the token.</p>
-          </WidgetDisabledInfo>
-        )}
-
-        <PostLoreContainerWrap isWidgetDisabled={isWidgetDisabled}>
+        <PostLoreContainerWrap>
           {showEditor ? (
             <PostLoreContainer
+              mandatoryMissingProps={mandatoryMissingProps}
               contractAddress={contractAddress}
               nft={nft}
               tokenId={tokenId}

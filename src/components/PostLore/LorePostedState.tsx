@@ -13,12 +13,26 @@ const FAILED_LORE_POST_INFO = 'Lore could not be posted. Please try again.';
 export interface LorePostedStateProps {
   lorePostingStatus: string;
   nft: any;
+  tokenName?: string;
+  tokenThumbnail?: string;
+  header?: string;
 }
 
-export default function LorePostedState({ lorePostingStatus, nft }: LorePostedStateProps) {
+export default function LorePostedState({
+  lorePostingStatus,
+  nft,
+  tokenName,
+  tokenThumbnail,
+  header,
+}: LorePostedStateProps) {
   return (
     <Wrapper>
-      <PostLoreHeader nft={nft} title={'token name'}></PostLoreHeader>
+      <PostLoreHeader
+        nft={nft}
+        tokenName={tokenName}
+        tokenThumbnail={tokenThumbnail}
+        header={header}
+      ></PostLoreHeader>
 
       <MsgBody>
         {lorePostingStatus === 'success' ? <TickIcon /> : <CrossIcon />}
