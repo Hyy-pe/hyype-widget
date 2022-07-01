@@ -18,6 +18,7 @@ export const MsgInfoLists = styled.ul`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 80px;
   font-size: 14px;
   color: ${({ theme }) => theme.secondaryColor};
 `;
