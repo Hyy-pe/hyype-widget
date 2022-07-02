@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './index.scss';
 import Widget, { WidgetProps } from './containers/Widget';
 
 export { SupportedChainId } from 'constants/chains';

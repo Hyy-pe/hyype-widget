@@ -19,7 +19,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-import { Button, PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
+import { PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
@@ -59,7 +59,6 @@ export default function Widget(props: WidgetProps) {
     subHeader,
     callToAction,
   } = props;
-  const [showEditor, setShowEditor] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [nft, setNft] = useState<any | null>(null);
 
@@ -144,25 +143,21 @@ export default function Widget(props: WidgetProps) {
     <ThemeProvider theme={theme}>
       <WidgetWrapper width={width}>
         <PostLoreContainerWrap>
-          {showEditor ? (
-            <PostLoreContainer
-              mandatoryMissingProps={mandatoryMissingProps}
-              contractAddress={contractAddress}
-              nft={nft}
-              tokenId={tokenId}
-              web3Provider={web3Provider}
-              clientId={clientId}
-              platformSpecificSigningMessage={platformSpecificSigningMessage}
-              env={env}
-              tokenName={tokenName}
-              tokenThumbnail={tokenThumbnail}
-              header={header}
-              subHeader={subHeader}
-              callToAction={callToAction}
-            />
-          ) : (
-            <Button onClick={() => setShowEditor(true)}>Post Lore</Button>
-          )}
+          <PostLoreContainer
+            mandatoryMissingProps={mandatoryMissingProps}
+            contractAddress={contractAddress}
+            nft={nft}
+            tokenId={tokenId}
+            web3Provider={web3Provider}
+            clientId={clientId}
+            platformSpecificSigningMessage={platformSpecificSigningMessage}
+            env={env}
+            tokenName={tokenName}
+            tokenThumbnail={tokenThumbnail}
+            header={header}
+            subHeader={subHeader}
+            callToAction={callToAction}
+          />
         </PostLoreContainerWrap>
       </WidgetWrapper>
     </ThemeProvider>

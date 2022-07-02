@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 
-interface ImgContainer {
-  theme: {
-    colors: {
-      cryptopunks: {
-        bgColor: string;
-      };
-      chainfaces: {
-        bgColor: string;
-      };
-      pfp: {
-        bgColor: string;
-      };
-    };
-  };
-}
 interface MainWrapProps {
   isCanon?: boolean;
 }
