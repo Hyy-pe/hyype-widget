@@ -50,7 +50,7 @@ export default function LorePostedState(props: PostLoreContentProps) {
           <HeaderInfo> {subHeader || 'Select the type of lore'}</HeaderInfo>
           <LoreDropdown
             contractAddress={contractAddress}
-            setLoreType={() => {}}
+            setLoreType={() => undefined}
             loreType="Collector Statement"
             env={env}
           />

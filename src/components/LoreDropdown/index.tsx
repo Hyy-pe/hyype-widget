@@ -34,12 +34,12 @@ const Dropdown: FC<LoreDropdownProps> = ({ contractAddress = '', setLoreType, lo
       setIsLoading(true);
 
       const getLoreTags = async () => {
-        const loreTags = await fetchCommunityLoreTags({
+        const loreTags: any = await fetchCommunityLoreTags({
           contractAddress,
           env,
         });
 
-        setLoreTags(loreTags);
+        setLoreTags(loreTags || []);
       };
       getLoreTags();
     } catch (error) {

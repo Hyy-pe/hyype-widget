@@ -16,7 +16,7 @@ import {
   MainWrap,
   Wrapper,
 } from 'containers/PostLoreContainer/postLoreContainerStyling';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
 import { Button, PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
@@ -40,6 +40,7 @@ export type WidgetProps = {
 
 export const globalOb = {
   env: '',
+  clientId: '',
 };
 
 export default function Widget(props: WidgetProps) {
@@ -47,7 +48,7 @@ export default function Widget(props: WidgetProps) {
     web3Provider,
     contractAddress = '',
     tokenId = '',
-    clientId,
+    clientId = '',
     platformSpecificSigningMessage,
     env = '',
     theme,
@@ -88,18 +89,19 @@ export default function Widget(props: WidgetProps) {
         }
       };
 
-      // update the env to change the api domain
+      // update the env, clientID to change the api domain
       if (globalOb.env !== env) globalOb.env = env;
+      if (globalOb.clientId !== clientId) globalOb.clientId = clientId;
 
       getNftDetails();
     } catch (error) {
       console.log('err getNftDetails: ', error);
     }
-  }, [contractAddress, tokenId, web3Provider, env, tokenThumbnail]);
+  }, [clientId, contractAddress, tokenId, web3Provider, env, tokenThumbnail]);
 
   // checkRequiredFields();
 
-  const mandatoryProps = [
+  const mandatoryProps: any = [
     'clientId',
     'contractAddress',
     'tokenId',
@@ -107,7 +109,9 @@ export default function Widget(props: WidgetProps) {
     'platformSpecificSigningMessage',
   ];
 
-  const mandatoryMissingProps = mandatoryProps.filter((p) => !props[p]);
+  // check if any mandatory prop is missing
+  const mandatoryMissingProps = mandatoryProps.filter((p: any) => !props[p as keyof WidgetProps]);
+  // @ts-ignore
   if (!web3Provider?.selectedAddress) mandatoryMissingProps.push('web3Provider');
 
   if (isLoading) {
@@ -139,8 +143,6 @@ export default function Widget(props: WidgetProps) {
   return (
     <ThemeProvider theme={theme}>
       <WidgetWrapper width={width}>
-        {/* {checkRequiredFields()} */}
-
         <PostLoreContainerWrap>
           {showEditor ? (
             <PostLoreContainer

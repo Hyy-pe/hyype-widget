@@ -90,13 +90,13 @@ const cjs = {
   watch: false,
 };
 
-// const types = {
-//   // input: 'dts/index.d.ts',
-//   output: { file: 'dist/index.d.ts' },
-//   external: (source) => source.endsWith('.scss'),
-//   plugins: [dts({ compilerOptions: { baseUrl: 'dts' } })],
-//   watch: false,
-// }
+const types = {
+  input: 'src/index.d.ts',
+  output: { file: 'dist/index.d.ts' },
+  external: (source) => source.endsWith('.scss'),
+  plugins: [dts({ compilerOptions: { baseUrl: 'dts' } })],
+  watch: false,
+};
 
 // const locales = {
 //   // input: 'src/locales/*.js',
@@ -126,8 +126,8 @@ const assets = [
   },
 ];
 
-// const config = [esm, cjs, types, locales]
-const config = [esm, cjs];
+const config = [esm, cjs, types];
+// const config = [esm, cjs];
 config.config = { ...esm, output: { ...esm.output, sourcemap: true } };
 config.assets = assets;
 module.exports = config;
@@ -139,5 +139,7 @@ function isEthers(source) {
 
 function squelchTypeWarnings(warning, warn) {
   if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return;
+  if (warning.code === 'THIS_IS_UNDEFINED') return;
+  if (warning.code === 'CIRCULAR_DEPENDENCY') return;
   warn(warning);
 }

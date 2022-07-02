@@ -128,6 +128,7 @@ export const tools = {
               fileType: imageToUpload.type,
               fileWidth: width,
               fileHeight: height,
+              clientId: globalOb?.clientId,
               env: globalOb?.env,
             });
 
@@ -154,6 +155,7 @@ export const tools = {
               fileType: imageToUpload.type,
               fileWidth: width,
               fileHeight: height,
+              clientId: globalOb?.clientId,
               env: globalOb?.env,
             });
 

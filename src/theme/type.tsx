@@ -1,5 +1,5 @@
 import { Text, TextProps as TextPropsWithCss } from 'rebass';
-import styled, { useTheme } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 
 import type { Color } from './styled';
 
@@ -190,16 +190,16 @@ export function TransitionButton(props: TextProps & { buttonSize: 'small' | 'med
   );
 }
 
-export function Code(props: TextProps) {
-  const { fontFamilyCode } = useTheme();
-  return (
-    <TextWrapper
-      className="code"
-      fontSize={12}
-      fontWeight={400}
-      lineHeight="16px"
-      fontFamily={fontFamilyCode}
-      {...props}
-    />
-  );
-}
+// export function Code(props: TextProps) {
+//   const { fontFamilyCode } = useTheme();
+//   return (
+//     <TextWrapper
+//       className="code"
+//       fontSize={12}
+//       fontWeight={400}
+//       lineHeight="16px"
+//       fontFamily={fontFamilyCode}
+//       {...props}
+//     />
+//   );
+// }

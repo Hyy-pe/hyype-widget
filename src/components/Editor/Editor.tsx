@@ -72,17 +72,19 @@ const Editor = ({ setEditor, children, data, options }: any) => {
 
   return (
     <React.Fragment>
-      {!children && <div className="container" id="editor-js"></div>}
+      {!children && (
+        <div
+          className="container"
+          id="editor-js"
+          style={{
+            width: '100%',
+            padding: '0',
+            minHeight: '400px',
+          }}
+        ></div>
+      )}
 
       {children}
-
-      <style jsx>{`
-        .container {
-          width: 100%;
-          padding: 0;
-          min-height: 400px;
-        }
-      `}</style>
     </React.Fragment>
   );
 };

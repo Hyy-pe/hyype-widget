@@ -3,7 +3,8 @@ import './index.css';
 import Widget, { WidgetProps } from './containers/Widget';
 
 export { SupportedChainId } from 'constants/chains';
-export { darkTheme, defaultTheme, lightTheme } from 'theme';
+// export { darkTheme, defaultTheme, lightTheme } from 'theme';
+export { defaultTheme, lightTheme } from 'theme';
 
 export function HyypeWidget(props: WidgetProps) {
   return (
