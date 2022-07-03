@@ -1,7 +1,5 @@
 import { getBaseApiUrl } from 'utils';
 
-const CLIENT_ID = 'dc5fa5fa9dd2ee590ec0011b7320b5d12ed1f0ad';
-
 const headers = {
   'Content-Type': 'application/json',
 };
@@ -45,11 +43,13 @@ export const getImgSign = async ({
   fileType,
   fileWidth,
   fileHeight,
+  clientId,
   env,
 }: {
   fileType: any;
   fileWidth: any;
   fileHeight: any;
+  clientId: string;
   env: string;
 }) => {
   const url = `${getBaseApiUrl(env)}/api/v1/public/lore/image/signed-upload-request`;
@@ -64,7 +64,7 @@ export const getImgSign = async ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'client-id': CLIENT_ID,
+        'client-id': clientId,
       },
       body: JSON.stringify(payload),
     });
@@ -75,7 +75,15 @@ export const getImgSign = async ({
   }
 };
 
-export const postLore = async ({ payload, env }: { payload: any; env: string }) => {
+export const postLore = async ({
+  payload,
+  clientId,
+  env,
+}: {
+  payload: any;
+  clientId: string;
+  env: string;
+}) => {
   try {
     const url = `${getBaseApiUrl(env)}/api/v1/lore/create-lore`;
 
@@ -83,7 +91,7 @@ export const postLore = async ({ payload, env }: { payload: any; env: string }) 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'client-id': CLIENT_ID,
+        'client-id': clientId,
       },
       body: JSON.stringify(payload),
     });

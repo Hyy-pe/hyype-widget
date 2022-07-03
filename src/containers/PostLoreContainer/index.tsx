@@ -131,7 +131,7 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
         },
       };
 
-      const postLoreResp = await postLore({ payload, env });
+      const postLoreResp = await postLore({ payload, clientId, env });
 
       if (postLoreResp?.loreId) {
         setLorePostingStatus('success');

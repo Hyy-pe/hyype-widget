@@ -15,9 +15,6 @@ interface ImgContainer {
     };
   };
 }
-interface MainWrapProps {
-  isCanon?: boolean;
-}
 
 export const Wrapper = styled.div`
   display: flex;
@@ -26,11 +23,13 @@ export const Wrapper = styled.div`
   flex-grow: 1;
 `;
 
-export const MainWrap = styled.div`
+export const MainWrap: any = styled.div`
   display: flex;
   flex-grow: 1;
   width: 100%;
   justify-content: center;
+
+  ${(props: any) => props.minHeight && `min-height: ${props.minHeight}`}
 `;
 
 export const EditorWrapper = styled.div`

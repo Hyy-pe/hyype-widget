@@ -45,7 +45,7 @@ export default function PostLoreHeader({
   return (
     <HeaderWrap>
       <HeaderImg>
-        <ImgWrap imgUrl={imgSrc} onClick={() => {}} />
+        <ImgWrap imgUrl={imgSrc} onClick={() => undefined} />
       </HeaderImg>
 
       <HeaderText>

@@ -19,14 +19,14 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
-import { Button, PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
+import { PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
 
 export type WidgetProps = {
   web3Provider?: Eip1193Provider | JsonRpcProvider;
   contractAddress?: string;
   tokenId?: string;
   clientId?: string;
-  platformSpecificSigningMessage: string;
+  platformSpecificSigningMessage?: string;
   env?: string;
   theme?: Theme;
   width?: string | number;
@@ -40,6 +40,7 @@ export type WidgetProps = {
 
 export const globalOb = {
   env: '',
+  clientId: '',
 };
 
 export default function Widget(props: WidgetProps) {
@@ -47,7 +48,7 @@ export default function Widget(props: WidgetProps) {
     web3Provider,
     contractAddress = '',
     tokenId = '',
-    clientId,
+    clientId = '',
     platformSpecificSigningMessage,
     env = '',
     theme,
@@ -58,8 +59,7 @@ export default function Widget(props: WidgetProps) {
     subHeader,
     callToAction,
   } = props;
-  const [showEditor, setShowEditor] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [nft, setNft] = useState<any | null>(null);
 
   const width = useMemo(() => {
@@ -88,18 +88,19 @@ export default function Widget(props: WidgetProps) {
         }
       };
 
-      // update the env to change the api domain
+      // update the env, clientID to change the api domain
       if (globalOb.env !== env) globalOb.env = env;
+      if (globalOb.clientId !== clientId) globalOb.clientId = clientId;
 
       getNftDetails();
     } catch (error) {
       console.log('err getNftDetails: ', error);
     }
-  }, [contractAddress, tokenId, web3Provider, env, tokenThumbnail]);
+  }, [clientId, contractAddress, tokenId, web3Provider, env, tokenThumbnail]);
 
   // checkRequiredFields();
 
-  const mandatoryProps = [
+  const mandatoryProps: any = [
     'clientId',
     'contractAddress',
     'tokenId',
@@ -107,60 +108,52 @@ export default function Widget(props: WidgetProps) {
     'platformSpecificSigningMessage',
   ];
 
-  const mandatoryMissingProps = mandatoryProps.filter((p) => !props[p]);
+  // check if any mandatory prop is missing
+  const mandatoryMissingProps = mandatoryProps.filter((p: any) => !props[p as keyof WidgetProps]);
+  // @ts-ignore
   if (!web3Provider?.selectedAddress) mandatoryMissingProps.push('web3Provider');
 
-  if (isLoading) {
-    return (
-      <ThemeProvider theme={theme}>
-        <WidgetWrapper width={width}>
-          <Wrapper>
-            <PostLoreHeaderLoader />
-
-            <MainWrap style={{ minHeight: '600px' }}>
-              <EditorMain>
-                <SpinnerWrap>
-                  <Spinner color="#FF8162" />
-                </SpinnerWrap>
-              </EditorMain>
-            </MainWrap>
-
-            <FooterWrap>
-              <DescWrapLoader>
-                <DescLong />
-              </DescWrapLoader>
-            </FooterWrap>
-          </Wrapper>
-        </WidgetWrapper>
-      </ThemeProvider>
-    );
-  }
-
-  return (
+  return isLoading ? (
     <ThemeProvider theme={theme}>
       <WidgetWrapper width={width}>
-        {/* {checkRequiredFields()} */}
+        <Wrapper>
+          <PostLoreHeaderLoader />
 
+          <MainWrap minHeight="600px">
+            <EditorMain>
+              <SpinnerWrap>
+                <Spinner color="#FF8162" />
+              </SpinnerWrap>
+            </EditorMain>
+          </MainWrap>
+
+          <FooterWrap>
+            <DescWrapLoader>
+              <DescLong />
+            </DescWrapLoader>
+          </FooterWrap>
+        </Wrapper>
+      </WidgetWrapper>
+    </ThemeProvider>
+  ) : (
+    <ThemeProvider theme={theme}>
+      <WidgetWrapper width={width}>
         <PostLoreContainerWrap>
-          {showEditor ? (
-            <PostLoreContainer
-              mandatoryMissingProps={mandatoryMissingProps}
-              contractAddress={contractAddress}
-              nft={nft}
-              tokenId={tokenId}
-              web3Provider={web3Provider}
-              clientId={clientId}
-              platformSpecificSigningMessage={platformSpecificSigningMessage}
-              env={env}
-              tokenName={tokenName}
-              tokenThumbnail={tokenThumbnail}
-              header={header}
-              subHeader={subHeader}
-              callToAction={callToAction}
-            />
-          ) : (
-            <Button onClick={() => setShowEditor(true)}>Post Lore</Button>
-          )}
+          <PostLoreContainer
+            mandatoryMissingProps={mandatoryMissingProps}
+            contractAddress={contractAddress}
+            nft={nft}
+            tokenId={tokenId}
+            web3Provider={web3Provider}
+            clientId={clientId}
+            platformSpecificSigningMessage={platformSpecificSigningMessage}
+            env={env}
+            tokenName={tokenName}
+            tokenThumbnail={tokenThumbnail}
+            header={header}
+            subHeader={subHeader}
+            callToAction={callToAction}
+          />
         </PostLoreContainerWrap>
       </WidgetWrapper>
     </ThemeProvider>

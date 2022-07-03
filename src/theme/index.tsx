@@ -4,8 +4,9 @@ import { ThemeProvider as StyledProvider } from 'styled-components/macro';
 
 import type { Colors, ComputedTheme, Theme } from './styled';
 
-export * from './dynamic';
+// export * from './dynamic';
 export * from './layer';
+export type { Color, Colors, Theme } from './styled';
 export * as ThemedText from './type';
 
 const brandLight = 'hsl(331.3, 100%, 50%)';
@@ -39,19 +40,19 @@ export const lightTheme: Colors = {
 };
 
 // dark theme
-export const darkTheme: Colors = {
-  // surface
-  backgroundColor: '#E7E7E7', // 'hsla(0, 0%, 100%, 1)',
+// export const darkTheme: Colors = {
+//   // surface
+//   backgroundColor: '#E7E7E7', // 'hsla(0, 0%, 100%, 1)',
 
-  // text
-  foregroundColor: 'hsl(0,0%,0%)', // hsl(0,0%,0%,0.75)'
-  activeColor: 'hsla(12,97%,65%,1)',
-  buttonTextColor: 'hsla(0,0%,100%,1)',
-  highlightColor: 'hsla(0, 0%, 50%, 0.08)',
+//   // text
+//   foregroundColor: 'hsl(0,0%,0%)', // hsl(0,0%,0%,0.75)'
+//   activeColor: 'hsla(12,97%,65%,1)',
+//   buttonTextColor: 'hsla(0,0%,100%,1)',
+//   highlightColor: 'hsla(0, 0%, 50%, 0.08)',
 
-  // state
-  ...stateColors,
-};
+//   // state
+//   ...stateColors,
+// };
 
 export const defaultTheme = {
   borderRadius: 8,

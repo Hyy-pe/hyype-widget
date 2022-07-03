@@ -52,7 +52,7 @@ const transpile = {
     // Source code transformation
     replace({
       // esm requires fully-specified paths:
-      'react/jsx-runtime': 'react/jsx-runtime.js',
+      // 'react/jsx-runtime': 'react/jsx-runtime.js',
       preventAssignment: true,
     }),
     json(), // imports json as ES6; doing so enables module resolution
@@ -90,30 +90,13 @@ const cjs = {
   watch: false,
 };
 
-// const types = {
-//   // input: 'dts/index.d.ts',
-//   output: { file: 'dist/index.d.ts' },
-//   external: (source) => source.endsWith('.scss'),
-//   plugins: [dts({ compilerOptions: { baseUrl: 'dts' } })],
-//   watch: false,
-// }
-
-// const locales = {
-//   // input: 'src/locales/*.js',
-//   output: [
-//     {
-//       dir: 'dist',
-//       format: 'esm',
-//       sourcemap: false,
-//     },
-//     {
-//       dir: 'dist/cjs',
-//       sourcemap: false,
-//     },
-//   ],
-//   watch: false,
-// //   plugins: [commonjs(), multi()],
-// }
+const types = {
+  input: 'src/index.d.ts',
+  output: { file: 'dist/index.d.ts' },
+  external: (source) => source.endsWith('.css'),
+  plugins: [dts({ compilerOptions: { baseUrl: 'dts' } })],
+  watch: false,
+};
 
 const assets = [
   {
@@ -126,8 +109,8 @@ const assets = [
   },
 ];
 
-// const config = [esm, cjs, types, locales]
-const config = [esm, cjs];
+const config = [esm, cjs, types];
+// const config = [esm, cjs];
 config.config = { ...esm, output: { ...esm.output, sourcemap: true } };
 config.assets = assets;
 module.exports = config;
@@ -139,5 +122,7 @@ function isEthers(source) {
 
 function squelchTypeWarnings(warning, warn) {
   if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return;
+  if (warning.code === 'THIS_IS_UNDEFINED') return;
+  if (warning.code === 'CIRCULAR_DEPENDENCY') return;
   warn(warning);
 }

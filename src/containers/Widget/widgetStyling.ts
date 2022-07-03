@@ -12,7 +12,7 @@ export const WidgetWrapper = styled.div<{ width?: string | number }>`
   min-width: 320px;
   background-color: ${({ theme }) => theme.backgroundColor};
   border: 1px solid rgba(0, 0, 0, 0.75);
-  border-radius: ${({ theme }) => theme.borderRadius}pxpx;
+  border-radius: ${({ theme }) => theme.borderRadius}px;
   box-sizing: border-box;
   color: ${({ theme }) => theme.foregroundColor};
   -moz-osx-font-smoothing: grayscale;
