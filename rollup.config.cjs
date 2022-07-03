@@ -52,7 +52,7 @@ const transpile = {
     // Source code transformation
     replace({
       // esm requires fully-specified paths:
-      'react/jsx-runtime': 'react/jsx-runtime.js',
+      // 'react/jsx-runtime': 'react/jsx-runtime.js',
       preventAssignment: true,
     }),
     json(), // imports json as ES6; doing so enables module resolution
@@ -93,27 +93,10 @@ const cjs = {
 const types = {
   input: 'src/index.d.ts',
   output: { file: 'dist/index.d.ts' },
-  external: (source) => source.endsWith('.scss'),
+  external: (source) => source.endsWith('.css'),
   plugins: [dts({ compilerOptions: { baseUrl: 'dts' } })],
   watch: false,
 };
-
-// const locales = {
-//   // input: 'src/locales/*.js',
-//   output: [
-//     {
-//       dir: 'dist',
-//       format: 'esm',
-//       sourcemap: false,
-//     },
-//     {
-//       dir: 'dist/cjs',
-//       sourcemap: false,
-//     },
-//   ],
-//   watch: false,
-// //   plugins: [commonjs(), multi()],
-// }
 
 const assets = [
   {

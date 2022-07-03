@@ -4,7 +4,22 @@
   "description": "Hyype Lore Widget",
   "types": "dist/index.d.ts",
   "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.cjs"
+    },
+    "./locales/*": {
+      "import": "./dist/locales/*.js",
+      "require": "./dist/cjs/locales/*.cjs"
+    },
+    "./fonts.css": {
+      "import": "./dist/fonts.css",
+      "require": "./dist/fonts.css"
+    }
+  },
   "private": false,
   "scripts": {
     "cosmos": "cosmos",
@@ -12,6 +27,7 @@
     "start": "cosmos",
     "lint": "eslint .",
     "build": "tsc && rollup --config --failAfterWarnings",
+    "declaration": "tsc src/index.tsx --declaration",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

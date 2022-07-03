@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 
-interface MainWrapProps {
-  isCanon?: boolean;
+interface ImgContainer {
+  theme: {
+    colors: {
+      cryptopunks: {
+        bgColor: string;
+      };
+      chainfaces: {
+        bgColor: string;
+      };
+      pfp: {
+        bgColor: string;
+      };
+    };
+  };
 }
 
 export const Wrapper = styled.div`
@@ -11,11 +23,13 @@ export const Wrapper = styled.div`
   flex-grow: 1;
 `;
 
-export const MainWrap = styled.div`
+export const MainWrap: any = styled.div`
   display: flex;
   flex-grow: 1;
   width: 100%;
   justify-content: center;
+
+  ${(props: any) => props.minHeight && `min-height: ${props.minHeight}`}
 `;
 
 export const EditorWrapper = styled.div`

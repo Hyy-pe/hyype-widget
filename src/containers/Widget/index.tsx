@@ -16,7 +16,7 @@ import {
   MainWrap,
   Wrapper,
 } from 'containers/PostLoreContainer/postLoreContainerStyling';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Theme, ThemeProvider } from 'theme';
 
 import { PostLoreContainerWrap, WidgetWrapper } from './widgetStyling';
@@ -26,7 +26,7 @@ export type WidgetProps = {
   contractAddress?: string;
   tokenId?: string;
   clientId?: string;
-  platformSpecificSigningMessage: string;
+  platformSpecificSigningMessage?: string;
   env?: string;
   theme?: Theme;
   width?: string | number;
@@ -59,7 +59,7 @@ export default function Widget(props: WidgetProps) {
     subHeader,
     callToAction,
   } = props;
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [nft, setNft] = useState<any | null>(null);
 
   const width = useMemo(() => {
@@ -113,33 +113,29 @@ export default function Widget(props: WidgetProps) {
   // @ts-ignore
   if (!web3Provider?.selectedAddress) mandatoryMissingProps.push('web3Provider');
 
-  if (isLoading) {
-    return (
-      <ThemeProvider theme={theme}>
-        <WidgetWrapper width={width}>
-          <Wrapper>
-            <PostLoreHeaderLoader />
+  return isLoading ? (
+    <ThemeProvider theme={theme}>
+      <WidgetWrapper width={width}>
+        <Wrapper>
+          <PostLoreHeaderLoader />
 
-            <MainWrap style={{ minHeight: '600px' }}>
-              <EditorMain>
-                <SpinnerWrap>
-                  <Spinner color="#FF8162" />
-                </SpinnerWrap>
-              </EditorMain>
-            </MainWrap>
+          <MainWrap minHeight="600px">
+            <EditorMain>
+              <SpinnerWrap>
+                <Spinner color="#FF8162" />
+              </SpinnerWrap>
+            </EditorMain>
+          </MainWrap>
 
-            <FooterWrap>
-              <DescWrapLoader>
-                <DescLong />
-              </DescWrapLoader>
-            </FooterWrap>
-          </Wrapper>
-        </WidgetWrapper>
-      </ThemeProvider>
-    );
-  }
-
-  return (
+          <FooterWrap>
+            <DescWrapLoader>
+              <DescLong />
+            </DescWrapLoader>
+          </FooterWrap>
+        </Wrapper>
+      </WidgetWrapper>
+    </ThemeProvider>
+  ) : (
     <ThemeProvider theme={theme}>
       <WidgetWrapper width={width}>
         <PostLoreContainerWrap>

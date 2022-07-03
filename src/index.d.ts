@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import './index.scss';
+import './index.css';
 import { WidgetProps } from './containers/Widget';
 export { SupportedChainId } from './constants/chains';
 export { defaultTheme, lightTheme } from './theme';
