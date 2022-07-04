@@ -9,7 +9,7 @@ import {
   Spinner,
   SpinnerWrap,
 } from 'components/PostLore/postLoreHeaderStyling';
-import { WIDGET_MIN_WIDTH } from 'constants/misc';
+import { WIDGET_DEFAULT_WIDTH, WIDGET_MIN_WIDTH } from 'constants/misc';
 import PostLoreContainer from 'containers/PostLoreContainer';
 import {
   EditorMain,
@@ -71,7 +71,7 @@ export default function Widget(props: WidgetProps) {
       return WIDGET_MIN_WIDTH;
     }
 
-    return width ?? WIDGET_MIN_WIDTH;
+    return width ?? WIDGET_DEFAULT_WIDTH;
   }, [props.width]);
 
   useEffect(() => {

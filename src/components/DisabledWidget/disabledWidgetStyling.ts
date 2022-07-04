@@ -29,10 +29,7 @@ export const MsgInfoLists = styled.ul`
 `;
 
 export const MsgListItem = styled.li`
-  flex-basis: 48%;
+  flex-basis: 200px;
   line-height: 24px;
-
-  @media (max-width: 480px) {
-    flex-basis: 100%;
-  }
+  text-align: left;
 `;
