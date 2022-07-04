@@ -1,5 +1,5 @@
 {
-  "name": "@hyype/widget",
+  "name": "@hyype-inc/widget",
   "version": "0.1.0",
   "description": "Hyype Lore Widget",
   "types": "dist/index.d.ts",
@@ -20,7 +20,6 @@
       "require": "./dist/fonts.css"
     }
   },
-  "private": false,
   "scripts": {
     "cosmos": "cosmos",
     "cosmos:export": "cosmos-export",

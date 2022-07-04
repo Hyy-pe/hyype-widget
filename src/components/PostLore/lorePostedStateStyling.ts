@@ -13,6 +13,7 @@ export const MsgBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0px 20px 20px 20px;
   height: 100%;
 `;
 

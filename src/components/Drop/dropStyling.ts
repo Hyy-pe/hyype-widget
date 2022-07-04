@@ -148,9 +148,6 @@ export const OptionsWrapper = styled.div`
     css`
       left: 50%;
       right: unset;
-      @media ${props.theme.device.laptop} {
-        left: 0;
-      }
     `}
   ${(props: DropProps) =>
     props.align === 'left' &&
