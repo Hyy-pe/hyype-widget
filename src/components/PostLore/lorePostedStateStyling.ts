@@ -24,7 +24,7 @@ export const MsgTitle = styled.h1`
   font-weight: 500;
 `;
 
-export const MsgInfo = styled.p`
+export const MsgInfo = styled.div`
   margin: 0;
   font-size: 12px;
 `;

@@ -18,7 +18,8 @@ code {
 /* editor js */
 .ce-block__content,
 .ce-toolbar__content {
-  max-width: calc(100% - 75px) !important;
+  /* max-width: calc(100% - 75px) !important; */
+  margin: 0;
 }
 .cdx-block {
   max-width: calc(100%) !important;

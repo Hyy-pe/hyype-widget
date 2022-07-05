@@ -3,88 +3,82 @@ import React, { useEffect, useState } from 'react';
 
 import { tools } from './tools';
 
-/**
- * @param {EditorJS.Tool[]} toolsList
- * @param {*} param1
- * @param {EditorJS.EditorConfig} options
- */
-export const useEditor = (toolsList: any, { data, setEditor }: any, options: any = {}) => {
+const Editor = ({ setEditor, editorRef, children, data, options }: any) => {
+  // useEditor(tools, { data, setEditor }, options);
+
   const [editorInstance, setEditorInstance] = useState<any>(null);
-  const { data: ignoreData, tools: ignoreTools, holder: ignoreHolder, ...editorOptions } = options;
+  const editorContainer = React.useRef<HTMLDivElement>(null);
+  // const { data: ignoreData, tools: ignoreTools, holder: ignoreHolder, ...editorOptions } = options;
 
   // initialize
   useEffect(() => {
-    // create instance
-    const editor = new EditorJS({
-      /**
-       * Id of Element that should contain the Editor
-       */
-      holder: 'editor-js',
+    // if (editor) return;
 
-      /**
-       * Available Tools list.
-       * Pass Tool's class or Settings object for each Tool you want to use
-       */
-      tools: toolsList,
+    const initEditorInstance = async () => {
+      // cleanup;
+      console.log('>>> editorContainer.current: ', editorContainer.current);
+      debugger;
 
-      /**
-       * Previously saved data that should be rendered
-       */
-      data: data || {},
+      if (editorRef.current) {
+        await editorRef.current.isReady;
+        editorRef.destroy();
+      }
 
-      initialBlock: 'paragraph',
+      // create instance
+      editorRef.current = new EditorJS({
+        holder: editorContainer.current,
+        tools,
+        data: data || {},
+        initialBlock: 'paragraph',
+        minHeight: 1,
+        ...options,
+      });
+    };
 
-      minHeight: 1,
+    if (editorRef.current?.destroy) {
+      editorRef.current.destroy();
+    }
 
-      // Override editor options
-      ...editorOptions,
-    });
+    initEditorInstance();
+    // setEditorInstance(editorJs);
 
-    setEditorInstance(editor);
+    // if (editorJs && setEditor) {
+    //   setEditor(editorJs);
+    // }
 
     // cleanup
     return () => {
-      editor.isReady
-        .then(() => {
-          editor.destroy();
-          setEditorInstance(null);
-        })
-        .catch((e) => console.error('ERROR editor cleanup', e));
+      // @ts-ignore
+      if (editorRef.current?.destroy) {
+        editorRef.current?.destroy();
+      }
+
+      console.log('11111 cleanup editorJs !!!!: ');
+      // setEditorInstance(null);
+
+      // editorJs?.destroy();
+
+      // editorJs.isReady
+      //   .then(() => {
+      //     console.log('555555');
+      //   })
+      //   .catch((e) => console.error('ERROR editor cleanup', e));
     };
-  }, [toolsList]);
-
-  // set reference
-  useEffect(() => {
-    if (!editorInstance) {
-      return;
-    }
-    // Send editor instance to the parent
-    if (setEditor) {
-      setEditor(editorInstance);
-    }
-  }, [editorInstance, setEditor]);
-
-  return { editor: editorInstance };
-};
-
-const Editor = ({ setEditor, children, data, options }: any) => {
-  useEditor(tools, { data, setEditor }, options);
+  }, []);
 
   return (
     <React.Fragment>
-      {!children && (
-        <div
-          className="container"
-          id="editor-js"
-          style={{
-            width: '100%',
-            padding: '0',
-            minHeight: '400px',
-          }}
-        ></div>
-      )}
-
-      {children}
+      <div
+        className="container"
+        ref={editorContainer}
+        id="hyype-editor"
+        style={{
+          width: '100%',
+          padding: '0',
+          minHeight: '400px',
+          textAlign: 'left',
+        }}
+      ></div>
     </React.Fragment>
   );
 };

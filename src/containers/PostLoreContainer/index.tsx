@@ -1,3 +1,4 @@
+import type EditorJS from "@editorjs/editorjs";
 import { getNonce, postLore } from 'api/lore';
 import { Buffer } from 'buffer';
 import DisabledWidget from 'components/DisabledWidget';
@@ -9,7 +10,6 @@ import PostLoreHeader from 'components/PostLore/PostLoreHeader';
 import { HeaderInfo } from 'components/PostLore/postLoreHeaderStyling';
 import PoweredFooter from 'components/PoweredFooter';
 import React, { FC, useEffect, useState } from 'react';
-
 import {
   EditorMain,
   EditorWrapper,
@@ -17,6 +17,8 @@ import {
   MainWrap,
   Wrapper,
 } from './postLoreContainerStyling';
+
+// const Editor = React.lazy(() => import('components/Editor/Editor'));
 
 export interface PostLoreContentProps {
   mandatoryMissingProps: any;
@@ -58,6 +60,8 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
   const [btnText, setBtnText] = useState<string>('Post Lore');
   const [isSignRejected, setIsSignRejected] = useState<boolean>(false);
   const [lorePostingStatus, setLorePostingStatus] = useState<string>('');
+
+  const editorRef = React.useRef();
 
   useEffect(() => {
     setBtnText(callToAction || 'Post Lore');
@@ -118,7 +122,8 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
       // post lore
       setBtnText('Posting ...');
 
-      const editorContent = await editor?.save();
+      // @ts-ignore
+      const editorContent = await editorRef.current?.save();
 
       const payload = {
         signedMessage: sign,
@@ -188,19 +193,20 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
 
             {/* editor js */}
             <Editor
-              reInit
+              // reInit
               setEditor={setEditor}
+              editorRef={editorRef}
               options={{
                 placeholder: 'Enter for new paragraph',
-                autofocus: true,
+                // autofocus: true,
                 onReady: () => {
-                  console.count('Check callback 1234!');
+                  console.count('Editor.js is ready!');
                 },
                 // onChange: () => {
                 //   setIsLoreContentAdded(true);
                 // },
               }}
-              data={loreContent}
+              data={{}}
             />
           </EditorWrapper>
         </EditorMain>
