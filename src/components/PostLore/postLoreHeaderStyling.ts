@@ -191,6 +191,7 @@ export const SpinnerWrap = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
 `;
 
 export const Spinner = styled(SpinnerIcon)`

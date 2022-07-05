@@ -39,7 +39,7 @@ export const EditorWrapper = styled.div`
 
 export const EditorMain = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-flow: column nowrap;
   align-items: flex-start;
   padding: 24px 20px 20px 20px;
