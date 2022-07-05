@@ -27,7 +27,6 @@ export interface PostLoreContentProps {
   clientId: string;
   platformSpecificSigningMessage?: string;
   env: string;
-  loreContent?: any;
   tokenName?: string;
   tokenThumbnail?: string;
   header?: string;
@@ -45,7 +44,6 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
     clientId,
     platformSpecificSigningMessage,
     env,
-    loreContent,
     tokenName,
     tokenThumbnail,
     header,
@@ -53,11 +51,12 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
     callToAction,
   } = props;
 
-  const [editor, setEditor] = useState<any>(null);
   const [loreType, setLoreType] = useState('Collector Statement');
   const [btnText, setBtnText] = useState<string>('Post Lore');
   const [isSignRejected, setIsSignRejected] = useState<boolean>(false);
   const [lorePostingStatus, setLorePostingStatus] = useState<string>('');
+
+  const editorRef = React.useRef();
 
   useEffect(() => {
     setBtnText(callToAction || 'Post Lore');
@@ -118,7 +117,8 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
       // post lore
       setBtnText('Posting ...');
 
-      const editorContent = await editor?.save();
+      // @ts-ignore
+      const editorContent = await editorRef.current?.save();
 
       const payload = {
         signedMessage: sign,
@@ -188,19 +188,14 @@ const PostLoreContent: FC<PostLoreContentProps> = (props) => {
 
             {/* editor js */}
             <Editor
-              reInit
-              setEditor={setEditor}
+              editorRef={editorRef}
               options={{
                 placeholder: 'Enter for new paragraph',
-                autofocus: true,
                 onReady: () => {
-                  console.count('Check callback 1234!');
+                  console.count('Editor.js is ready!');
                 },
-                // onChange: () => {
-                //   setIsLoreContentAdded(true);
-                // },
               }}
-              data={loreContent}
+              data={{}}
             />
           </EditorWrapper>
         </EditorMain>

@@ -1,6 +1,6 @@
 {
-  "name": "@hyype/widget",
-  "version": "0.0.1",
+  "name": "@hyype-inc/widget",
+  "version": "0.1.3",
   "description": "Hyype Lore Widget",
   "types": "dist/index.d.ts",
   "main": "dist/cjs/index.cjs",
@@ -20,7 +20,6 @@
       "require": "./dist/fonts.css"
     }
   },
-  "private": false,
   "scripts": {
     "cosmos": "cosmos",
     "cosmos:export": "cosmos-export",

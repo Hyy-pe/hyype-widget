@@ -16,14 +16,20 @@ export const MsgListsHeader = styled.p`
 export const MsgInfoLists = styled.ul`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin-bottom: 80px;
   font-size: 14px;
   color: ${({ theme }) => theme.secondaryColor};
+
+  @media (min-width: 500px) {
+    // padding-left: calc(40px + 6%);
+    // max-width: 500px;
+  }
 `;
 
 export const MsgListItem = styled.li`
-  flex-basis: 48%;
+  flex-basis: 200px;
   line-height: 24px;
+  text-align: left;
 `;

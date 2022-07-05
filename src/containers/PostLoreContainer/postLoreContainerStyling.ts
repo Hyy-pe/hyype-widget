@@ -38,17 +38,19 @@ export const EditorWrapper = styled.div`
 `;
 
 export const EditorMain = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  padding: 24px 20px 20px 20px;
   background: ${({ theme }) => theme.backgroundColor};
   border-radius: 14px;
   box-sizing: border-box;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  padding: 24px 20px 20px 20px;
   width: 100%;
 `;
 
 export const LoreDropdownWrap = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 `;

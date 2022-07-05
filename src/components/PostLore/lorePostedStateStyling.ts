@@ -13,6 +13,7 @@ export const MsgBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0px 20px 20px 20px;
   height: 100%;
 `;
 
@@ -23,7 +24,7 @@ export const MsgTitle = styled.h1`
   font-weight: 500;
 `;
 
-export const MsgInfo = styled.p`
+export const MsgInfo = styled.div`
   margin: 0;
   font-size: 12px;
 `;
