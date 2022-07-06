@@ -1,6 +1,6 @@
 # Hyype Widget
 
-You can post a lore in Hyy.pe using this component library!
+You can post a lore using the component library!
 
 ## Installation
 
