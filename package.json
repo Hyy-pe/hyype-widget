@@ -2,6 +2,8 @@
   "name": "@hyype-inc/widget",
   "version": "0.1.5",
   "description": "Hyype Lore Widget",
+  "homepage": "https://github.com/Hyy-pe/hyype-widget#readme",
+  "repository": "https://github.com/Hyy-pe/hyype-widget",
   "types": "dist/index.d.ts",
   "main": "dist/cjs/index.cjs",
   "module": "dist/index.js",
@@ -30,6 +32,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "keywords": [
+    "hyype",
+    "widget",
+    "hyypeWidget"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
