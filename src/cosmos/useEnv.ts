@@ -3,12 +3,13 @@ import useOption from './useOption';
 
 enum Env {
   Production = 'production',
+  Staging = 'staging',
   Sandbox = 'sandbox',
 }
 
 export default function useEnv() {
   const envType: any = useOption('env', {
-    options: [Env.Production, Env.Sandbox],
+    options: [Env.Production, Env.Staging, Env.Sandbox],
     defaultValue: Env.Sandbox,
   });
   const [env, setEnv] = useState<string>();

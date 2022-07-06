@@ -1,6 +1,6 @@
-import { SANDBOX_API_URL, STAGING_API_URL } from 'constants/api';
+import { PRODUCTION_API_URL, SANDBOX_API_URL, STAGING_API_URL } from 'constants/api';
 
-export { STAGING_API_URL, SANDBOX_API_URL } from 'constants/api';
+export { PRODUCTION_API_URL, SANDBOX_API_URL, STAGING_API_URL } from 'constants/api';
 
 export const getNftImgSrc = (data: any) => {
   const image =
@@ -15,6 +15,8 @@ export const getNftImgSrc = (data: any) => {
 
 export const getBaseApiUrl = (env: string) => {
   if (env === 'production') {
+    return PRODUCTION_API_URL;
+  } else if (env === 'staging') {
     return STAGING_API_URL;
   } else if (env === 'sandbox') {
     return SANDBOX_API_URL;
