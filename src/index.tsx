@@ -3,9 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 
 import Widget, { WidgetProps } from './containers/Widget';
 export { SupportedChainId } from 'constants/chains';
-
-// export { darkTheme, defaultTheme, lightTheme } from 'theme';
 export { defaultTheme, lightTheme } from 'theme';
+export type { Theme } from 'theme';
 
 export function HyypeWidget(props: WidgetProps) {
   return (

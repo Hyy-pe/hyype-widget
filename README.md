@@ -7,11 +7,9 @@ You can post a lore in Hyy.pe using this component library!
 Install the widgets library via `npm` or `yarn`.
 
 ```js
-yarn add @hyype/widget
+yarn add @hyype-inc/widget
 ```
 
 ```js
-npm i --save @hyype/widget
+npm i --save @hyype-inc/widget
 ```
-
-In the project directory, you can run:
