@@ -1,6 +1,8 @@
 # Lore Widget
 Hyype widget is a React component that can be easily imported into any react-based web3  application. With the hyype widget, your can enabled your community to share lore using Hyype APIs natively inside your apps without ever interact with hyype's webapp.
 
+[Documentation](https://docs.hyy.pe/api-reference/lore-react-component)
+
 ![2222](https://user-images.githubusercontent.com/1647155/179365438-c2c2c0af-6d6c-48a7-a810-8246722b9276.png)
 
 ## Installation
